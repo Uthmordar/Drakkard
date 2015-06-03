@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Drakkard
+        psr4_prefix: Drakkard
+        src_path: app
