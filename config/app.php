@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'url' => env('APP_URL'),
+	'url' => 'http://localhost',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -135,6 +135,7 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
+                'Illuminate\Html\HtmlServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -191,6 +192,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+                'Form'      => 'Illuminate\Html\FormFacade',
+                'HTML'      => 'Illuminate\Html\HtmlFacade',
                 'CardGenerator' => 'Uthmordar\Cardator\Card\CardGenerator',
                 'CardProcessor' => 'Uthmordar\Cardator\Card\CardProcessor',
                 'Cardator'  => 'Uthmordar\Cardator\Cardator',
