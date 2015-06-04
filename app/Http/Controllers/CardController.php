@@ -5,15 +5,18 @@ use Drakkard\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Drakkard\Card;
+use Drakkard\Category;
 use Drakkard\Services\CardatorServices;
 
 class CardController extends Controller {
     private $card;
     private $cardator;
+    private $category;
     
-    public function __construct(Card $card, CardatorServices $cardator){
+    public function __construct(Card $card, CardatorServices $cardator, Category $category){
         $this->card=$card;
         $this->cardator=$cardator;
+        $this->category=$category;
         $this->middleware('auth');
     }
     /**
@@ -46,15 +49,14 @@ class CardController extends Controller {
             $this->card->alreadyExist($input['url']);
 
             $cards=$this->cardator->getCardsFromUrl($input['url']);
-            
             foreach($cards as $c){
                 $card=new Card;
-                $this->card->createCard($c, $card);
+                $this->card->createCard($c, $card, $this->category);
             }
         }catch(\RuntimeException $e){
             \Session::flash('messageCardCreate', "<p class='success bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>" . $e->getMessage() . "</p>");
             return \Redirect::to('home');
-        }catch(\Exception $e){
+        }catch(\InvalidArgumentException $e){
             $this->card->bindUserByUrl($input['url']);
             \Session::flash('messageCardCreate', "<p class='success bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>" . $e->getMessage() . "</p>");
             return \Redirect::to('home');

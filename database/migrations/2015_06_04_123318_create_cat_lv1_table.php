@@ -15,7 +15,6 @@ class CreateCatLv1Table extends Migration {
             $table->increments('id');
             $table->text('name');
             $table->integer('parent_id')->unsigned()->nullable();
-            $table->integer('children_id')->unsigned()->nullable();
         });
     }
 

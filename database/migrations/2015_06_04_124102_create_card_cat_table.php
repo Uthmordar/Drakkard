@@ -11,10 +11,10 @@ class CreateCardCatTable extends Migration {
      * @return void
      */
     public function up(){
-        Schema::create('card_categorie', function(Blueprint $table){
-            $table->integer('cat_id')->unsigned()->nullable();
+        Schema::create('card_category', function(Blueprint $table){
+            $table->integer('category_id')->unsigned()->nullable();
             $table->integer('card_id')->unsigned()->nullable();
-            $table->foreign('cat_id')->references('id')->on('categories')->onDelete('CASCADE');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('CASCADE');
             $table->foreign('card_id')->references('id')->on('cards')->onDelete('CASCADE');
         });
     }

@@ -34,7 +34,7 @@ class Card extends Model {
         }
     }
 
-    public function createCard(\Uthmordar\Cardator\Card\lib\iCard $data, $card){
+    public function createCard(\Uthmordar\Cardator\Card\lib\iCard $data, $card, Category $category){
         $card->type=$data->type;
         $card->url=$data->url;
         $card->name=$data->type . $data->url;
@@ -43,11 +43,11 @@ class Card extends Model {
         $card->updated_at=time();
         $card->save();
         $card->users()->attach(Auth::user());
-        /*if(!Tag::findOrFail($input['tag'])){
-            \Session::flash('messageProjectCreate', "<p class='error bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>Tag issue.</p>");
-            throw new \RuntimeException('No tag');
-        }*/
-        //$project->tag()->associate(Tag::findOrFail($input['tag']));
+        $cat=$data->getParents();
+        $cat[]=$data->getQualifiedName();
+        $rCat=$category->registerCategories($cat);
+        $card->categories()->attach($rCat);
+
         return $card;
     }
     
@@ -60,9 +60,8 @@ class Card extends Model {
     public function alreadyExist($url){
         $card=Card::where('url', '=', $url)->get();
         if(count($card)){
-            throw new \Exception('This page has already been crawled, but you will be bind to it.');
+            throw new \InvalidArgumentException('This page has already been crawled, but you will be bind to it.');
         }
-        return true;
     }
     
     /**
