@@ -17,6 +17,11 @@ class Card extends Model {
      * @var array
      */
     protected $fillable = ['card', 'type', 'url', 'name'];
+    
+    public static function boot(){
+        parent::boot();
+        Card::observe(new Events\Observers\CardObserver);
+    }
 
     public function users(){
         return $this->belongsToMany('Drakkard\User');
@@ -28,9 +33,11 @@ class Card extends Model {
 
 
     public function catCount(){
-        if($this->categories){
-            $this->categories->card_count=$this->categories->cards()->count();
-            $this->categories->save();
+        if(count($this->categories)){
+            foreach($this->categories as $cat){
+                $cat->card_count=$cat->cards()->count();
+                $cat->save();
+            }
         }
     }
 
@@ -41,13 +48,13 @@ class Card extends Model {
         $card->card=serialize($data);
         $card->created_at=time();
         $card->updated_at=time();
-        $card->save();
         $card->users()->attach(Auth::user());
         $cat=$data->getParents();
         $cat[]=$data->getQualifiedName();
         $rCat=$category->registerCategories($cat);
         $card->categories()->attach($rCat);
-
+        $card->save();
+        
         return $card;
     }
     
