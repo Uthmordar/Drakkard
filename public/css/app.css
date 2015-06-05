@@ -932,6 +932,22 @@ img {
   border: 1px solid #dddddd;
   border-radius: 4px;
   transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out 1s;
+  -moz-transition-timing-function: ease-in;
+  -moz-transition-delay: 0s;
+  -webkit-transition: all 0.2s ease-in-out 1s;
+  -webkit-transition-timing-function: ease-in;
+  -webkit-transition-delay: 0s;
+  transition: all 0.2s ease-in-out 1s;
+  transition-timing-function: ease-in;
+  transition-delay: 0s;
+  -webkit-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -moz-perspective: 500px;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
   display: inline-block;
   max-width: 100%;
   height: auto;
@@ -2340,6 +2356,22 @@ output {
   border-radius: 4px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -moz-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s 1s;
+  -moz-transition-timing-function: ease-in;
+  -moz-transition-delay: 0s;
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s 1s;
+  -webkit-transition-timing-function: ease-in;
+  -webkit-transition-delay: 0s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s 1s;
+  transition-timing-function: ease-in;
+  transition-delay: 0s;
+  -webkit-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -moz-perspective: 500px;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 .form-control:focus {
   border-color: #66afe9;
@@ -3101,6 +3133,22 @@ input[type="button"].btn-block {
 .fade {
   opacity: 0;
   transition: opacity 0.15s linear;
+  -moz-transition: opacity 0.15s linear 1s;
+  -moz-transition-timing-function: ease-in;
+  -moz-transition-delay: 0s;
+  -webkit-transition: opacity 0.15s linear 1s;
+  -webkit-transition-timing-function: ease-in;
+  -webkit-transition-delay: 0s;
+  transition: opacity 0.15s linear 1s;
+  transition-timing-function: ease-in;
+  transition-delay: 0s;
+  -webkit-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -moz-perspective: 500px;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 .fade.in {
   opacity: 1;
@@ -4610,6 +4658,22 @@ a.badge:focus {
   border: 1px solid #dddddd;
   border-radius: 4px;
   transition: border 0.2s ease-in-out;
+  -moz-transition: border 0.2s ease-in-out 1s;
+  -moz-transition-timing-function: ease-in;
+  -moz-transition-delay: 0s;
+  -webkit-transition: border 0.2s ease-in-out 1s;
+  -webkit-transition-timing-function: ease-in;
+  -webkit-transition-delay: 0s;
+  transition: border 0.2s ease-in-out 1s;
+  transition-timing-function: ease-in;
+  transition-delay: 0s;
+  -webkit-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -moz-perspective: 500px;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 .thumbnail > img,
 .thumbnail a > img {
@@ -4735,6 +4799,22 @@ a.thumbnail.active {
   background-color: #337ab7;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   transition: width 0.6s ease;
+  -moz-transition: width 0.6s ease 1s;
+  -moz-transition-timing-function: ease-in;
+  -moz-transition-delay: 0s;
+  -webkit-transition: width 0.6s ease 1s;
+  -webkit-transition-timing-function: ease-in;
+  -webkit-transition-delay: 0s;
+  transition: width 0.6s ease 1s;
+  transition-timing-function: ease-in;
+  transition-delay: 0s;
+  -webkit-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -moz-perspective: 500px;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 .progress-striped .progress-bar,
 .progress-bar-striped {
@@ -4745,6 +4825,26 @@ a.thumbnail.active {
 .progress-bar.active {
   -webkit-animation: progress-bar-stripes 2s linear infinite;
   animation: progress-bar-stripes 2s linear infinite;
+  -moz-animation-name: progress-bar-stripes 2s linear infinite;
+  -moz-animation-duration: 2s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -moz-animation-direction: alternate;
+  -webkit-animation-name: progress-bar-stripes 2s linear infinite;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-name: progress-bar-stripes 2s linear infinite;
+          animation-name: progress-bar-stripes 2s linear infinite;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
 }
 .progress-bar-success {
   background-color: #5cb85c;
@@ -5732,6 +5832,22 @@ button.close {
   display: none;
   position: relative;
   transition: 0.6s ease-in-out left;
+  -moz-transition: 0.6s ease-in-out left 1s;
+  -moz-transition-timing-function: ease-in;
+  -moz-transition-delay: 0s;
+  -webkit-transition: 0.6s ease-in-out left 1s;
+  -webkit-transition-timing-function: ease-in;
+  -webkit-transition-delay: 0s;
+  transition: 0.6s ease-in-out left 1s;
+  transition-timing-function: ease-in;
+  transition-delay: 0s;
+  -webkit-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -moz-perspective: 500px;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
@@ -6231,3 +6347,121 @@ label,
 .checkbox label {
   font-weight: 300;
 }
+.card {
+  background-color: #EEE;
+  border-radius: 1rem;
+  height: 250px;
+}
+.row {
+  margin-bottom: 1rem;
+}
+
+html {
+  font-size: 62.5%;
+}
+body {
+  width: 100%;
+  /* ligature */
+  -moz-font-feature-settings: "liga=1, dlig=1";
+  -moz-font-feature-settings: "liga", "dlig";
+  /* pour FF 15+ */
+  -ms-font-feature-settings: "liga", "dlig";
+  -webkit-font-feature-settings: "liga", "dlig";
+  font-feature-settings: "liga", "dlig";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: subpixel-antialiased;
+  text-shadow: 0 0 -1px rgba(0, 0, 0, 0.03);
+}
+p,
+h1,
+h2,
+h3,
+li,
+a,
+textarea,
+input {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: subpixel-antialiased;
+  text-shadow: 0 0 -1px rgba(0, 0, 0, 0.03);
+  -webkit-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+body * {
+  max-width: 100%;
+}
+h1 {
+  font-size: 5rem;
+}
+h2 {
+  font-size: 4.2rem;
+}
+h3 {
+  font-size: 3.4rem;
+  line-height: 3.8rem;
+}
+p {
+  font-size: 1.68rem;
+  width: 60ex;
+  line-height: 2.8rem;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -o-hyphens: auto;
+  hyphens: auto;
+}
+li {
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -o-hyphens: auto;
+  hyphens: auto;
+}
+a:not(.show) {
+  text-decoration: none;
+  color: inherit;
+}
+a.show {
+  color: inherit;
+}
+a.show:hover {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+.bold {
+  font-weight: 700;
+}
+.clear {
+  clear: both;
+}
+.emph {
+  font-style: italic;
+}
+.error,
+.error_form {
+  color: crimson;
+  font-size: 1.82rem;
+}
+.success_form {
+  color: #41836a;
+  font-size: 1.82rem;
+}
+.color_red,
+a.color_red {
+  color: #9c4c61;
+}
+.color_white {
+  color: #FFF;
+}
+.blur {
+  -webkit-filter: blur(5px);
+  -ms-filter: blur(5px);
+  -moz-filter: blur(5px);
+  filter: blur(5px);
+}
+
+
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */

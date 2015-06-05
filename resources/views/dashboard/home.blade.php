@@ -24,6 +24,22 @@
                     {!!Form::submit('Add card(s)', array('class'=>'btn btn-primary'))!!}
                 {!!Form::close()!!}
             </div>
+            <section id="my-cards">
+                @for($i=0; $i < count($cards); $i++)
+                    @if($i%3==0)
+                        <div class="row"> 
+                    @endif
+                    <article class="card col-md-3 col-md-offset-1">
+                        <a href="{!! $cards[$i]->url !!}" class="btn btn-default">See source</a>
+                        @foreach($cards[$i]->categories()->get() as $cat)
+                            {!! $cat->name !!}
+                        @endforeach
+                    </article>
+                    @if($i%3==2)
+                        </div>
+                    @endif
+                @endfor
+            </section>
         @endif
     </section>
 </div>

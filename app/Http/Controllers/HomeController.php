@@ -1,5 +1,7 @@
 <?php namespace Drakkard\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller {
 
 	/*
@@ -28,8 +30,8 @@ class HomeController extends Controller {
 	 * @return Response
 	 */
 	public function index(){
-            
-            return view('dashboard/home');
+            $cards=Auth::user()->cards()->get();
+            return view('dashboard/home', compact('cards'));
 	}
 
         

@@ -27,12 +27,12 @@ class Registrar implements RegistrarContract {
 	 * @param  array  $data
 	 * @return User
 	 */
-	public function create(array $data)
-	{
+	public function create(array $data){
 		return User::create([
-			'name' => $data['name'],
-			'email' => $data['email'],
-			'password' => bcrypt($data['password']),
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'password' => bcrypt($data['password']),
+                    'snippet_code' => bcrypt($data['name'] . str_random(12))
 		]);
 	}
 

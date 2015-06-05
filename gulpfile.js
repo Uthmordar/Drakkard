@@ -1,5 +1,29 @@
 var elixir = require('laravel-elixir');
 
+var gulp=require('gulp'),
+minifyCSS=require('gulp-minify-css'),
+uglify = require('gulp-uglify');
+
+elixir.extend("compress", function(from, to) {
+    gulp.task('compress', function() {
+      gulp.src(from)
+        .pipe(uglify())
+        .pipe(gulp.dest(to));
+    });
+    
+    return this.queueTask("compress");
+});
+
+elixir.extend("minifycss", function(from, to) {
+    gulp.task('minify-css', function(){
+      return gulp.src(from)
+        .pipe(minifyCSS({keepBreaks:true}))
+        .pipe(gulp.dest(to));
+    });
+    
+    return this.queueTask("minify-css");
+});
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -12,5 +36,15 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.less('app.less');
+    mix.less([
+        'app.less',
+        'base.less',
+        'mixin.less'
+    ]);
+});
+
+elixir(function(mix) {
+    mix.styles([
+        "app.css"
+    ], 'public/css/app.css', 'public/css');
 });

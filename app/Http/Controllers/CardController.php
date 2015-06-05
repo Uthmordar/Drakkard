@@ -26,7 +26,7 @@ class CardController extends Controller {
      */
     public function index()
     {
-            //
+
     }
 
     /**
@@ -58,7 +58,7 @@ class CardController extends Controller {
             return \Redirect::to('home');
         }catch(\InvalidArgumentException $e){
             $this->card->bindUserByUrl($input['url']);
-            \Session::flash('messageCardCreate', "<p class='success bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>" . $e->getMessage() . "</p>");
+            \Session::flash('messageCardCreate', "<p class='success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>" . $e->getMessage() . "</p>");
             return \Redirect::to('home');
         }
         \Session::flash('messageDash', "Card created.");
