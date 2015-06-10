@@ -25,22 +25,62 @@
                 {!!Form::close()!!}
             </div>
             <section id="my-cards">
-                @for($i=0; $i < count($cards); $i++)
-                    @if($i%3==0)
-                        <div class="row"> 
-                    @endif
-                    <article class="card col-md-3 col-md-offset-1">
-                        <a href="{!! $cards[$i]->url !!}" class="btn btn-default">See source</a>
-                        @foreach($cards[$i]->categories()->get() as $cat)
-                            {!! $cat->name !!}
+                @foreach($cards as $card)
+                    <article class="card">
+                        <ul class="nav-card">
+                            <li>
+                                <a href="{{route('detachCard', ['id'=>$card->id])}}" class="link-nav-card bg-red"><span class='glyphicon glyphicon-trash'></span></a>
+                            </li>
+                            <li>
+                                <a href="{{route('card.show', ['id'=>$card->id])}}" class="link-nav-card bg-blue"><span class='glyphicon glyphicon-eye-open'></span></a>
+                            </li>
+                        </ul>
+                        @if($card->card->name)
+                            <h4>{{$card->card->name}}</h4>
+                        @endif
+                        <a href="{!! $card->url !!}" class="">{{$card->card->url}}</a>
+                        <ul>
+                        @foreach($card->categories()->get() as $cat)
+                        <li>{!! $cat->name !!}</li>
                         @endforeach
+                        </ul>
+                        @if($card->card->image)
+                            @if(is_array($card->card->image))
+                                <div class="image-prop" style="background: url('{{$card->card->image[0]}}') no-repeat center;"></div>
+                                <ul class='list-image'>
+                                    @foreach($card->card->image as $src)
+                                    <li><img src='{{$src}}'/></li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <div class="image-prop" style="background: url('{{$card->card->image}}')no-repeat center;"></div>
+                            @endif
+                        @endif
+                        @if($card->card->video)
+                            @if(strpos($card->card->video, 'youtube'))
+                                <iframe width="100%" height="160" src="{{$card->card->video}}" frameborder="0"></iframe>
+                            @else
+                                <video>
+                                    @foreach($card->card->video as $vid)
+                                        <source src='{{$vid}}'/>
+                                    @endforeach
+                                </video>
+                            @endif
+                        @endif
                     </article>
-                    @if($i%3==2)
-                        </div>
-                    @endif
-                @endfor
+                @endforeach
             </section>
         @endif
     </section>
 </div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    $(function(){
+       $('.link-detach-card').on('click', function(e){
+           return confirm('Unfollow this card ?');
+       });
+   });
+</script>
 @endsection

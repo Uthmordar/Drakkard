@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 
+use Drakkard\Card;
+
 class HomeController extends Controller {
 
 	/*
@@ -21,7 +23,7 @@ class HomeController extends Controller {
 	 * @return void
 	 */
 	public function __construct(){
-		$this->middleware('auth');
+            $this->middleware('auth');
 	}
 
 	/**
@@ -30,9 +32,17 @@ class HomeController extends Controller {
 	 * @return Response
 	 */
 	public function index(){
-            $cards=Auth::user()->cards()->get();
+            $cards=Auth::user()->cards()->orderBy('updated_at', 'desc')->get();
+            foreach($cards as $card){
+                $card->card=unserialize($card->card);
+            }
             return view('dashboard/home', compact('cards'));
 	}
 
-        
+        public function detachCard($id){
+            $card=Card::findOrFail($id);
+            $card->unbindUser();
+            \Session::flash('messageCardCreate', "<p class='success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>Card remove with success from your personal space.</p>");
+            return \Redirect::to('home');
+        }
 }

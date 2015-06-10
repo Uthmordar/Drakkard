@@ -2079,12 +2079,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Uthmordar/cardator.git",
-                "reference": "ab62c0cdeebcf2dc6b9ac4415d920cae255a51b9"
+                "reference": "595bc938025c4a6a2034d158ce07f3f5b0139975"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Uthmordar/cardator/zipball/ab62c0cdeebcf2dc6b9ac4415d920cae255a51b9",
-                "reference": "ab62c0cdeebcf2dc6b9ac4415d920cae255a51b9",
+                "url": "https://api.github.com/repos/Uthmordar/cardator/zipball/595bc938025c4a6a2034d158ce07f3f5b0139975",
+                "reference": "595bc938025c4a6a2034d158ce07f3f5b0139975",
                 "shasum": ""
             },
             "require": {
@@ -2108,7 +2108,7 @@
                 }
             ],
             "description": "parse web pages and generate card object from microdata",
-            "time": "2015-06-10 12:23:10"
+            "time": "2015-06-10 14:44:23"
         },
         {
             "name": "vlucas/phpdotenv",

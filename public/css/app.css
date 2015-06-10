@@ -6342,18 +6342,89 @@ button.close {
     display: none !important;
   }
 }
+.bg-red {
+  background-color: #bb113d;
+}
+.bg-blue {
+  background-color: #337ab7;
+}
 body,
 label,
 .checkbox label {
   font-weight: 300;
 }
-.card {
-  background-color: #EEE;
-  border-radius: 1rem;
-  height: 250px;
+#my-cards .card {
+  position: relative;
+  display: inline-block;
+  background-color: #d3d4d5;
+  width: 350px;
+  height: 350px;
+  margin: 1rem 1rem 0 0;
+  overflow: hidden;
 }
-.row {
-  margin-bottom: 1rem;
+#my-cards .card .nav-card {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0;
+  display: block;
+  margin: 0;
+  padding: 0;
+  -moz-transition: opacity 1s;
+  -moz-transition-timing-function: ease-out;
+  -moz-transition-delay: 0s;
+  -webkit-transition: opacity 1s;
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transition-delay: 0s;
+  transition: opacity 1s;
+  transition-timing-function: ease-out;
+  transition-delay: 0s;
+  -webkit-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -moz-perspective: 500px;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+#my-cards .card .nav-card li {
+  margin-bottom: 0.4rem;
+}
+#my-cards .card .nav-card li .link-nav-card {
+  width: 3rem;
+  height: 3rem;
+  color: #fafafa;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 50%;
+  border: 2px solid #fafafa;
+}
+#my-cards .card:hover .nav-card {
+  opacity: 1;
+}
+#my-cards .card .image-prop {
+  width: 100%;
+  height: 120px;
+  background-size: cover;
+}
+#my-cards .card .list-image {
+  margin: 0;
+  padding: 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  max-height: 80px;
+}
+#my-cards .card .list-image li {
+  cursor: pointer;
+  border: 2px solid #fafafa;
 }
 
 html {

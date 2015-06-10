@@ -83,4 +83,10 @@ class Card extends Model {
             }
         }
     }
+    
+    public function unbindUser(){
+        if($this->users()->find(Auth::user()->id)){
+            $this->users()->detach(Auth::user());
+        }
+    }
 }
