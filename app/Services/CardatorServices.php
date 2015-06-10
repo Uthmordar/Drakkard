@@ -13,7 +13,7 @@ class CardatorServices{
         $cardator=new \Cardator(new \CardGenerator, new \CardProcessor, new \Parser);
         $cardator->crawl($url);
         $cardator->doPostProcess();
-
+        
         return $cardator->getCards($json);
     }
 }

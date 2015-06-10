@@ -21,26 +21,42 @@ class Category extends Model {
         return $this->belongsToMany('Drakkard\Card');
     }
     
-    public function registerCategories(array $cats){
+    public function registerCategories(array $cats, $mainCat){
         $data=[];
-        $sCats=[];
         $links=[];
-        foreach($cats as $cat){
-            if(empty($cat)){ continue;}
-            
-            $cat=explode('::', $cat);
-            foreach($cat as $sCat){
-                $isExist=$this->alreadyExist($sCat);
-                $id=(!$isExist)? $this->createCategory($sCat)->id : $isExist->id;
-                $sCats[]=$id;
-                $links[]=$id;
-            }
-
-            $data[]=$sCats;
+        if(is_array($cats[0])){
             $sCats=[];
+            foreach($cats as $branchCat){
+                $branchCat[]=$mainCat;
+                foreach($branchCat as $cat){
+                    if(empty($cat)){ continue;}
+                    $id=$this->setCategorie($cat);
+                    $sCats[]=$id;
+                    $links[]=$id;
+                }
+                $data[]=$sCats;
+                $sCats=[];
+            }
+        }else{
+            $cats[]=$mainCat;
+            foreach($cats as $cat){
+                if(empty($cat)){ continue;}
+
+                $id=$this->setCategorie($cat);
+                $links[]=$id;
+                $data[0][]=$id;
+            }
         }
+        
         $this->setRelationship($data);
-        return $links;
+        return array_unique($links);
+    }
+    
+    private function setCategorie($cat){
+        $isExist=$this->alreadyExist($cat);
+        $id=(!$isExist)? $this->createCategory($cat)->id : $isExist->id;
+            
+        return $id;
     }
     
     public function alreadyExist($catName){
@@ -59,14 +75,14 @@ class Category extends Model {
     }
     
     public function setRelationship($array){
-        $max=count($array);
-        for($i=0; $i<$max; $i++){
-            foreach($array[$i] as $c){
-                $cat=Category::find($c);
+        foreach($array as $branch){
+            $max=count($branch);
+            for($i=0; $i<$max; $i++){
+                $cat=Category::find($branch[$i]);
                 if($i==0){
                     $cat->parent_id=null;
                 }else{
-                    $cat->parent_id=$array[$i-1][0];
+                    $cat->parent_id=$branch[$i-1];
                 }
                 $cat->save();
             }

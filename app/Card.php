@@ -50,11 +50,10 @@ class Card extends Model {
         $card->updated_at=time();
         $card->save();
         $card->users()->attach(Auth::user());
-        $cat=$data->getParents();
-        $cat[]=$data->getQualifiedName();
-        $rCat=$category->registerCategories($cat);
+        
+        $rCat=$category->registerCategories($data->getParents(), $data->getQualifiedName());
         $card->categories()->attach($rCat);
-        $card->save();
+        //$card->save();
 
         return $card;
     }
