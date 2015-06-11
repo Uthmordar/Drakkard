@@ -6353,10 +6353,17 @@ label,
 .checkbox label {
   font-weight: 400;
 }
+.navbar {
+  margin-bottom: 0;
+}
+.container {
+  position: relative;
+  padding-top: 1.5rem;
+}
 .pagination {
   margin: 0.5rem 0;
 }
-#my-cards .card {
+.card {
   position: relative;
   display: inline-block;
   background-color: #d3d4d5;
@@ -6365,43 +6372,13 @@ label,
   margin: 1rem 1rem 0 0;
   overflow: hidden;
 }
-#my-cards .card.Action {
-  background: #c7c8ef;
-}
-#my-cards .card.BroadcastService {
-  background: #c7ddef;
-}
-#my-cards .card.CreativeWork {
-  background: #c7efee;
-}
-#my-cards .card.Event {
-  background: #c8efc7;
-}
-#my-cards .card.Intagible {
-  background: #ddefc7;
-}
-#my-cards .card.MedicalEntity {
-  background: #efeec7;
-}
-#my-cards .card.Organization {
-  background: #efd9c7;
-}
-#my-cards .card.Person {
-  background: #efc7c8;
-}
-#my-cards .card.Place {
-  background: #efc7dd;
-}
-#my-cards .card.Product {
-  backgroud: #eec7ef;
-}
-#my-cards .card .text-content {
+.card .text-content {
   padding: 1rem;
 }
-#my-cards .card h4 {
+.card h4 {
   margin-bottom: 0.7rem;
 }
-#my-cards .card .nav-card {
+.card .nav-card {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -6426,10 +6403,10 @@ label,
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
 }
-#my-cards .card .nav-card li {
+.card .nav-card li {
   margin-bottom: 0.4rem;
 }
-#my-cards .card .nav-card li .link-nav-card {
+.card .nav-card li .link-nav-card {
   width: 3rem;
   height: 3rem;
   color: #fafafa;
@@ -6445,26 +6422,32 @@ label,
   border-radius: 50%;
   border: 2px solid #fafafa;
 }
-#my-cards .card:hover .nav-card {
+.card:hover .nav-card {
   opacity: 1;
 }
-#my-cards .card .cat-list {
+.card .cat-list {
   margin: 0.7rem;
   padding: 0;
 }
-#my-cards .card .cat-list li {
+.card .cat-list li {
   display: inline-block;
   margin: 0 0.4rem;
 }
-#my-cards .card .image-prop {
+.card .media-block {
+  position: absolute;
+  bottom: 0;
+  height: 233px;
+  width: 100%;
+}
+.card .media-block .image-prop {
   width: 100%;
   height: 233px;
   background-size: cover;
 }
-#my-cards .card .image-prop.image-multiple {
+.card .media-block .image-prop.image-multiple {
   height: 153px;
 }
-#my-cards .card .list-image {
+.card .media-block .list-image {
   margin: 0;
   padding: 0;
   display: -webkit-flex;
@@ -6472,10 +6455,203 @@ label,
   display: flex;
   max-height: 80px;
 }
-#my-cards .card .list-image li {
+.card .media-block .list-image li {
   cursor: pointer;
   overflow: hidden;
   border: 2px solid #fafafa;
+}
+#categories-menu {
+  position: absolute;
+  height: calc(100% - 52px);
+  padding: 1rem;
+  left: 0;
+  bottom: 0;
+  background-color: #f8f8f8;
+  border-right: 1px solid #E7E7E7;
+}
+#categories-menu ul {
+  padding: 0;
+}
+#categories-menu ul ul {
+  padding-left: 2rem;
+}
+.color-Action,
+.color-AchieveAction,
+.color-AssessAction,
+.color-ConsumeAction,
+.color-ControlAction,
+.color-CreateAction,
+.color-FindAction,
+.color-InteractAction,
+.color-MoveAction,
+.color-OrganizeAction,
+.color-PlayAction,
+.color-SearchAction,
+.color-TradeAction,
+.color-TransferAction,
+.color-UpdateAction {
+  color: #3338b7;
+}
+.color-BroadcastService {
+  color: #337ab7;
+}
+.color-CreativeWork,
+.color-Article,
+.color-Clip,
+.color-Comment,
+.color-CreativeWorkSeason,
+.color-CreativeWorkSeries,
+.color-Episode,
+.color-Game,
+.color-MediaObject,
+.color-MusicPlaylist,
+.color-SoftwareApplication,
+.color-WebPage,
+.color-WebPageElement {
+  color: #33b7b2;
+}
+.color-Event,
+.color-PublicationEvent,
+.color-UserInteraction {
+  color: #38b733;
+}
+.color-Intagible,
+.color-Audience,
+.color-BroadcastChannel,
+.color-Enumeration,
+.color-ItemList,
+.color-Offer,
+.color-Permit,
+.color-Quantity,
+.color-Rating,
+.color-Reservation,
+.color-Role,
+.color-Service,
+.color-StructuredValue {
+  color: #7ab733;
+}
+.color-MedicalEntity,
+.color-AnatomicalStructure,
+.color-MedicalGuideline,
+.color-MedicalIndication,
+.color-MedicalIntangible,
+.color-MedicalProcedure,
+.color-MedicalRiskEstimator,
+.color-MedicalSignOrSymptom,
+.color-MedicalStudy,
+.color-MedicalTest,
+.color-MedicalTherapy {
+  color: #b7b233;
+}
+.color-Organization,
+.color-EducationnalOrganization,
+.color-LocalBusiness,
+.color-PerformingGroup,
+.color-SportsOrganization {
+  color: #b77033;
+}
+.color-Person {
+  color: #b73338;
+}
+.color-Place,
+.color-AdministrativeArea,
+.color-CivicStructure,
+.color-Landform,
+.color-Residence {
+  color: #b7337a;
+}
+.color-Product,
+.color-Vehicle {
+  color: #b233b7;
+}
+.bg-Action,
+.bg-AchieveAction,
+.bg-AssessAction,
+.bg-ConsumeAction,
+.bg-ControlAction,
+.bg-CreateAction,
+.bg-FindAction,
+.bg-InteractAction,
+.bg-MoveAction,
+.bg-OrganizeAction,
+.bg-PlayAction,
+.bg-SearchAction,
+.bg-TradeAction,
+.bg-TransferAction,
+.bg-UpdateAction {
+  background: #c7c8ef;
+}
+.bg-BroadcastService {
+  background: #c7ddef;
+}
+.bg-CreativeWork,
+.bg-Article,
+.bg-Clip,
+.bg-Comment,
+.bg-CreativeWorkSeason,
+.bg-CreativeWorkSeries,
+.bg-Episode,
+.bg-Game,
+.bg-MediaObject,
+.bg-MusicPlaylist,
+.bg-SoftwareApplication,
+.bg-WebPage,
+.bg-WebPageElement {
+  background: #c7efee;
+}
+.bg-Event,
+.bg-PublicationEvent,
+.bg-UserInteraction {
+  background: #c8efc7;
+}
+.bg-Intagible,
+.bg-Audience,
+.bg-BroadcastChannel,
+.bg-Enumeration,
+.bg-ItemList,
+.bg-Offer,
+.bg-Permit,
+.bg-Quantity,
+.bg-Rating,
+.bg-Reservation,
+.bg-Role,
+.bg-Service,
+.bg-StructuredValue {
+  background: #ddefc7;
+}
+.bg-MedicalEntity,
+.bg-AnatomicalStructure,
+.bg-MedicalGuideline,
+.bg-MedicalIndication,
+.bg-MedicalIntangible,
+.bg-MedicalProcedure,
+.bg-MedicalRiskEstimator,
+.bg-MedicalSignOrSymptom,
+.bg-MedicalStudy,
+.bg-MedicalTest,
+.bg-MedicalTherapy {
+  background: #efeec7;
+}
+.bg-Organization,
+.bg-EducationnalOrganization,
+.bg-LocalBusiness,
+.bg-PerformingGroup,
+.bg-SportsOrganization {
+  background: #efd9c7;
+}
+.bg-Person {
+  background: #efc7c8;
+}
+.bg-Place,
+.bg-AdministrativeArea,
+.bg-CivicStructure,
+.bg-Landform,
+.bg-Residence {
+  background: #efc7dd;
+}
+.bg-Product,
+.bg-Vehicle {
+  background: #eec7ef;
 }
 
 html {

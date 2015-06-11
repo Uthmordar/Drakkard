@@ -43,116 +43,98 @@
 body, label, .checkbox label {
     font-weight: 400;
 }
+.navbar{
+    margin-bottom: 0;
+    
+}
+.container{
+    position: relative;
+    padding-top: 1.5rem;
+}
 
 .pagination{
     margin: 0.5rem 0;
 }
 
-#my-cards{
-    .card{
-        position: relative;
-        display: inline-block;
-        background-color: @bg-body-color;
-        width: 350px;
-        height: 350px;
-        margin: 1rem 1rem 0 0;
-        overflow: hidden;
-        
-        &.Action{
-            background: lighten(@color-action, 40%);
-        }
-        &.BroadcastService{
-            background: lighten(@color-broadcast, 40%);
-        }
-        &.CreativeWork{
-            background: lighten(@color-creative, 40%);
-        }
-        &.Event{
-            background: lighten(@color-event, 40%);
-        }
-        &.Intagible{
-            background: lighten(@color-intangible, 40%);
-        }
-        &.MedicalEntity{
-            background: lighten(@color-medical, 40%);
-        }
-        &.Organization{
-            background: lighten(@color-organization, 40%);
-        }
-        &.Person{
-            background: lighten(@color-person, 40%);
-        }
-        &.Place{
-            background: lighten(@color-place, 40%);
-        }
-        &.Product{
-            backgroud: lighten(@color-product, 40%);
-        }
-        
-        .text-content{
-            padding: 2*@padding;
-        }
+.card{
+    position: relative;
+    display: inline-block;
+    background-color: @bg-body-color;
+    width: 350px;
+    height: 350px;
+    margin: 1rem 1rem 0 0;
+    overflow: hidden;
 
-        h4{
-            margin-bottom: 0.7rem;
-        }
-        
-        .nav-card{
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            opacity: 0;
-            display: block;
-            margin: 0;
-            padding: 0;
-            .transition(opacity, 1s, ease-out, 0s);
+    .text-content{
+        padding: 2*@padding;
+    }
 
-            li{
-                margin-bottom: 0.4rem;
+    h4{
+        margin-bottom: 0.7rem;
+    }
 
-                .link-nav-card{
-                    width: 3rem;
-                    height: 3rem;
-                    color: lighten(@bg-body-color, 15%);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border-radius: 50%;
-                    border: 2px solid lighten(@bg-body-color, 15%);
-                }
+    .nav-card{
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        opacity: 0;
+        display: block;
+        margin: 0;
+        padding: 0;
+        .transition(opacity, 1s, ease-out, 0s);
+
+        li{
+            margin-bottom: 0.4rem;
+
+            .link-nav-card{
+                width: 3rem;
+                height: 3rem;
+                color: lighten(@bg-body-color, 15%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: 2px solid lighten(@bg-body-color, 15%);
             }
         }
+    }
 
-        &:hover .nav-card{
-            opacity: 1;
+    &:hover .nav-card{
+        opacity: 1;
+    }
+
+    .cat-list{
+        margin: 0.7rem;
+        padding: 0;
+
+        li{
+            display: inline-block;
+            margin: 0 0.4rem;
         }
-        
-        .cat-list{
-            margin: 0.7rem;
-            padding: 0;
-            
-            li{
-                display: inline-block;
-                margin: 0 0.4rem;
-            }
-        }
+    }
+
+    .media-block{
+        position: absolute;
+        bottom: 0;
+        height: 233px;
+        width: 100%;
         
         .image-prop{
             width: 100%;
             height: 233px;
             background-size: cover;
-            
+
             &.image-multiple{
                 height: 153px;
             }
         }
-        
+
         .list-image{
             margin: 0;
             padding: 0;
             display: flex;
             max-height: 80px;
-            
+
             li{
                 cursor: pointer;
                 overflow: hidden;
@@ -160,4 +142,96 @@ body, label, .checkbox label {
             }
         }
     }
+}
+
+#categories-menu{
+    position: absolute;
+    height: calc(~"100% - 52px");
+    padding: 2*@padding;
+    left: 0;
+    bottom: 0;
+    background-color: #f8f8f8;
+    border-right: 1px solid #E7E7E7;
+    
+    ul{
+        padding: 0;
+        
+        ul{
+            padding-left: 4*@padding;
+        }
+    }
+}
+
+.color-Action, .color-AchieveAction, .color-AssessAction, .color-ConsumeAction, .color-ControlAction, .color-CreateAction, 
+.color-FindAction, .color-InteractAction, .color-MoveAction, .color-OrganizeAction, .color-PlayAction, .color-SearchAction, .color-TradeAction, 
+.color-TransferAction, .color-UpdateAction{
+    color: @color-action;
+}
+.color-BroadcastService{
+    color: @color-broadcast;
+}
+.color-CreativeWork, .color-Article, .color-Clip, .color-Comment, .color-CreativeWorkSeason, .color-CreativeWorkSeries, 
+.color-Episode, .color-Game, .color-MediaObject, .color-MusicPlaylist, .color-SoftwareApplication, .color-WebPage, .color-WebPageElement{
+    color: @color-creative;
+}
+.color-Event, .color-PublicationEvent, .color-UserInteraction{
+    color: @color-event;
+}
+.color-Intagible, .color-Audience, .color-BroadcastChannel, .color-Enumeration, .color-ItemList, .color-Offer, 
+.color-Permit, .color-Quantity, .color-Rating, .color-Reservation, .color-Role, .color-Service, .color-StructuredValue{
+    color: @color-intangible;
+}
+.color-MedicalEntity, .color-AnatomicalStructure, .color-MedicalGuideline, .color-MedicalIndication, 
+.color-MedicalIntangible, .color-MedicalProcedure, .color-MedicalRiskEstimator, .color-MedicalSignOrSymptom,
+.color-MedicalStudy, .color-MedicalTest, .color-MedicalTherapy{
+    color: @color-medical;
+}
+.color-Organization, .color-EducationnalOrganization, .color-LocalBusiness, .color-PerformingGroup, .color-SportsOrganization{
+    color: @color-organization;
+}
+.color-Person{
+    color: @color-person;
+}
+.color-Place, .color-AdministrativeArea, .color-CivicStructure, .color-Landform, .color-Residence{
+    color: @color-place;
+}
+.color-Product, .color-Vehicle{
+    color: @color-product;
+}
+
+.bg-Action, .bg-AchieveAction, .bg-AssessAction, .bg-ConsumeAction, .bg-ControlAction, .bg-CreateAction, 
+.bg-FindAction, .bg-InteractAction, .bg-MoveAction, .bg-OrganizeAction, .bg-PlayAction, .bg-SearchAction, .bg-TradeAction, 
+.bg-TransferAction, .bg-UpdateAction{
+    background: lighten(@color-action, 40%);
+}
+.bg-BroadcastService{
+    background: lighten(@color-broadcast, 40%);
+}
+.bg-CreativeWork, .bg-Article, .bg-Clip, .bg-Comment, .bg-CreativeWorkSeason, .bg-CreativeWorkSeries, 
+.bg-Episode, .bg-Game, .bg-MediaObject, .bg-MusicPlaylist, .bg-SoftwareApplication, .bg-WebPage, .bg-WebPageElement{
+    background: lighten(@color-creative, 40%);
+}
+.bg-Event, .bg-PublicationEvent, .bg-UserInteraction{
+    background: lighten(@color-event, 40%);
+}
+.bg-Intagible, .bg-Audience, .bg-BroadcastChannel, .bg-Enumeration, .bg-ItemList, .bg-Offer, 
+.bg-Permit, .bg-Quantity, .bg-Rating, .bg-Reservation, .bg-Role, .bg-Service, .bg-StructuredValue{
+    background: lighten(@color-intangible, 40%);
+}
+.bg-MedicalEntity, .bg-AnatomicalStructure, .bg-MedicalGuideline, .bg-MedicalIndication, 
+.bg-MedicalIntangible, .bg-MedicalProcedure, .bg-MedicalRiskEstimator, .bg-MedicalSignOrSymptom,
+.bg-MedicalStudy, .bg-MedicalTest, .bg-MedicalTherapy{
+    background: lighten(@color-medical, 40%);
+}
+.bg-Organization, .bg-EducationnalOrganization, .bg-LocalBusiness, .bg-PerformingGroup, .bg-SportsOrganization{
+    background: lighten(@color-organization, 40%);
+}
+.bg-Person{
+    background: lighten(@color-person, 40%);
+}
+.bg-Place, .bg-AdministrativeArea, .bg-CivicStructure, .bg-Landform, .bg-Residence{
+    background: lighten(@color-place, 40%);
+}
+.bg-Product, .bg-Vehicle{
+    background: lighten(@color-product, 40%);
 }

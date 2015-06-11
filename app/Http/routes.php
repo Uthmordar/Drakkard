@@ -17,6 +17,8 @@ Route::get('home', 'HomeController@index');
 
 Route::resource('card', 'CardController');
 
+Route::resource('category', 'CategoryController');
+
 Route::get('detachCard/{id}', ['as'=>'detachCard', 'uses'=>'HomeController@detachCard'])->where('id', '[0-9]+');
 
 Route::controllers([

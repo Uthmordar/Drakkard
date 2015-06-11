@@ -1,47 +1,34 @@
 <?php namespace Drakkard\Http\Controllers;
 
 class WelcomeController extends Controller {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //$this->middleware('guest');
+    }
 
-	/*
-	|--------------------------------------------------------------------------
-	| Welcome Controller
-	|--------------------------------------------------------------------------
-	|
-	| This controller renders the "marketing page" for the application and
-	| is configured to only allow guests. Like most of the other sample
-	| controllers, you are free to modify or remove it as you desire.
-	|
-	*/
+    /**
+     * Show the application welcome screen to the user.
+     *
+     * @return Response
+     */
+    public function index(){
+        try{
+            $cardator=new \Cardator(new \CardGenerator, new \CardProcessor, new \Parser);
+            $cardator->crawl('http://test.tanguygodin.fr/test.html');
+            $cardator->doPostProcess();
 
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		$this->middleware('guest');
-	}
-
-	/**
-	 * Show the application welcome screen to the user.
-	 *
-	 * @return Response
-	 */
-	public function index(){
-            try{
-                $cardator=new \Cardator(new \CardGenerator, new \CardProcessor, new \Parser);
-                $cardator->crawl('http://test.tanguygodin.fr/test.html');
-                $cardator->doPostProcess();
-
-                $cards=$cardator->getCards();
-                foreach($cards as $c){
-                    var_dump($c);
-                }
-            }catch(\RuntimeException $e){
-                var_dump($e->getMessage());
+            $cards=$cardator->getCards();
+            foreach($cards as $c){
+                var_dump($c);
             }
-            return view('welcome');
-	}
-
+        }catch(\RuntimeException $e){
+            var_dump($e->getMessage());
+        }
+        return view('welcome');
+    }
 }

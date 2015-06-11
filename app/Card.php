@@ -43,8 +43,9 @@ class Card extends Model {
 
     public function createCard(\Uthmordar\Cardator\Card\lib\iCard $data, $card, Category $category){
         $card->type=$data->type;
-        $card->url=$data->url;
-        $card->name=$data->type . $data->url;
+        $url=(is_array($data->url))? $data->url[0] : $data->url;
+        $card->url=$url;
+        $card->name=$data->type . $url;
         $card->card=serialize($data);
         $card->created_at=time();
         $card->updated_at=time();
@@ -53,7 +54,7 @@ class Card extends Model {
         
         $rCat=$category->registerCategories($data->getParents(), $data->getQualifiedName());
         $card->categories()->attach($rCat);
-        //$card->save();
+        $card->save();
 
         return $card;
     }
