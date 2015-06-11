@@ -15,6 +15,17 @@
 @color-purple : #2E1F3F;
 @color-blue: #337AB7;
 
+@color-action: #3338B7;
+@color-broadcast: #337AB7;
+@color-creative: #33B7B2;
+@color-event: #38B733;
+@color-intangible: #7AB733;
+@color-medical: #B7B233;
+@color-organization: #B77033;
+@color-person: #B73338;
+@color-place: #B7337A;
+@color-product: #B233B7;
+
 @color-grey : #9FA1A3;
 
 @margin : 1rem;
@@ -30,7 +41,11 @@
 }
 
 body, label, .checkbox label {
-	font-weight: 300;
+    font-weight: 400;
+}
+
+.pagination{
+    margin: 0.5rem 0;
 }
 
 #my-cards{
@@ -42,7 +57,46 @@ body, label, .checkbox label {
         height: 350px;
         margin: 1rem 1rem 0 0;
         overflow: hidden;
+        
+        &.Action{
+            background: lighten(@color-action, 40%);
+        }
+        &.BroadcastService{
+            background: lighten(@color-broadcast, 40%);
+        }
+        &.CreativeWork{
+            background: lighten(@color-creative, 40%);
+        }
+        &.Event{
+            background: lighten(@color-event, 40%);
+        }
+        &.Intagible{
+            background: lighten(@color-intangible, 40%);
+        }
+        &.MedicalEntity{
+            background: lighten(@color-medical, 40%);
+        }
+        &.Organization{
+            background: lighten(@color-organization, 40%);
+        }
+        &.Person{
+            background: lighten(@color-person, 40%);
+        }
+        &.Place{
+            background: lighten(@color-place, 40%);
+        }
+        &.Product{
+            backgroud: lighten(@color-product, 40%);
+        }
+        
+        .text-content{
+            padding: 2*@padding;
+        }
 
+        h4{
+            margin-bottom: 0.7rem;
+        }
+        
         .nav-card{
             position: absolute;
             top: 0.5rem;
@@ -73,10 +127,24 @@ body, label, .checkbox label {
             opacity: 1;
         }
         
+        .cat-list{
+            margin: 0.7rem;
+            padding: 0;
+            
+            li{
+                display: inline-block;
+                margin: 0 0.4rem;
+            }
+        }
+        
         .image-prop{
             width: 100%;
-            height: 120px;
+            height: 233px;
             background-size: cover;
+            
+            &.image-multiple{
+                height: 153px;
+            }
         }
         
         .list-image{

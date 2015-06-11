@@ -6351,7 +6351,10 @@ button.close {
 body,
 label,
 .checkbox label {
-  font-weight: 300;
+  font-weight: 400;
+}
+.pagination {
+  margin: 0.5rem 0;
 }
 #my-cards .card {
   position: relative;
@@ -6361,6 +6364,42 @@ label,
   height: 350px;
   margin: 1rem 1rem 0 0;
   overflow: hidden;
+}
+#my-cards .card.Action {
+  background: #c7c8ef;
+}
+#my-cards .card.BroadcastService {
+  background: #c7ddef;
+}
+#my-cards .card.CreativeWork {
+  background: #c7efee;
+}
+#my-cards .card.Event {
+  background: #c8efc7;
+}
+#my-cards .card.Intagible {
+  background: #ddefc7;
+}
+#my-cards .card.MedicalEntity {
+  background: #efeec7;
+}
+#my-cards .card.Organization {
+  background: #efd9c7;
+}
+#my-cards .card.Person {
+  background: #efc7c8;
+}
+#my-cards .card.Place {
+  background: #efc7dd;
+}
+#my-cards .card.Product {
+  backgroud: #eec7ef;
+}
+#my-cards .card .text-content {
+  padding: 1rem;
+}
+#my-cards .card h4 {
+  margin-bottom: 0.7rem;
 }
 #my-cards .card .nav-card {
   position: absolute;
@@ -6409,10 +6448,21 @@ label,
 #my-cards .card:hover .nav-card {
   opacity: 1;
 }
+#my-cards .card .cat-list {
+  margin: 0.7rem;
+  padding: 0;
+}
+#my-cards .card .cat-list li {
+  display: inline-block;
+  margin: 0 0.4rem;
+}
 #my-cards .card .image-prop {
   width: 100%;
-  height: 120px;
+  height: 233px;
   background-size: cover;
+}
+#my-cards .card .image-prop.image-multiple {
+  height: 153px;
 }
 #my-cards .card .list-image {
   margin: 0;
@@ -6424,6 +6474,7 @@ label,
 }
 #my-cards .card .list-image li {
   cursor: pointer;
+  overflow: hidden;
   border: 2px solid #fafafa;
 }
 
@@ -6439,6 +6490,7 @@ body {
   -ms-font-feature-settings: "liga", "dlig";
   -webkit-font-feature-settings: "liga", "dlig";
   font-feature-settings: "liga", "dlig";
+  font-family: 'Quicksand', sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: subpixel-antialiased;
   text-shadow: 0 0 -1px rgba(0, 0, 0, 0.03);
@@ -6471,6 +6523,10 @@ h3 {
   font-size: 3.4rem;
   line-height: 3.8rem;
 }
+h4 {
+  font-size: 2.2rem;
+  line-height: 2.6rem;
+}
 p {
   font-size: 1.68rem;
   width: 60ex;
@@ -6487,16 +6543,6 @@ li {
   -ms-hyphens: auto;
   -o-hyphens: auto;
   hyphens: auto;
-}
-a:not(.show) {
-  text-decoration: none;
-  color: inherit;
-}
-a.show {
-  color: inherit;
-}
-a.show:hover {
-  text-decoration: none;
 }
 ul {
   list-style: none;

@@ -32,7 +32,7 @@ class HomeController extends Controller {
 	 * @return Response
 	 */
 	public function index(){
-            $cards=Auth::user()->cards()->orderBy('updated_at', 'desc')->get();
+            $cards=Auth::user()->cards()->orderBy('updated_at', 'desc')->paginate(6);
             foreach($cards as $card){
                 $card->card=unserialize($card->card);
             }

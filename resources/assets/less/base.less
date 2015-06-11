@@ -32,46 +32,52 @@ html{
 }
 		
 body{
-	width : 100%;	
-	/* ligature */
-	-moz-font-feature-settings: "liga=1, dlig=1"; 
-	-moz-font-feature-settings: "liga", "dlig"; /* pour FF 15+ */
-	-ms-font-feature-settings: "liga", "dlig"; 
-	-o-font-feature-settings: "liga", "dlig"; 
-	-webkit-font-feature-settings: "liga", "dlig"; 
-	font-feature-settings: "liga", "dlig";
-	
-	text-rendering : optimizeLegibility;
-	-webkit-font-smoothing: subpixel-antialiased;
-	text-shadow : 0 0 -1px rgba(0,0,0,0.03);
+    width : 100%;	
+    /* ligature */
+    -moz-font-feature-settings: "liga=1, dlig=1"; 
+    -moz-font-feature-settings: "liga", "dlig"; /* pour FF 15+ */
+    -ms-font-feature-settings: "liga", "dlig"; 
+    -o-font-feature-settings: "liga", "dlig"; 
+    -webkit-font-feature-settings: "liga", "dlig"; 
+    font-feature-settings: "liga", "dlig";
+    font-family: @font-family-default;
+
+    text-rendering : optimizeLegibility;
+    -webkit-font-smoothing: subpixel-antialiased;
+    text-shadow : 0 0 -1px rgba(0,0,0,0.03);
 }
 
 p, h1, h2, h3, li, a, textarea, input{
-	text-rendering : optimizeLegibility;
-	-webkit-font-smoothing: subpixel-antialiased;
-	text-shadow: 0 0 -1px rgba(0,0,0,0.03);
-	-moz-transform : translate3d(0,0,0);
-	-webkit-transform : translate3d(0,0,0);
-	-o-transform : translate3d(0,0,0);
-	-ms-transform : translate3d(0,0,0);
-	transform : translate3d(0,0,0);
+    text-rendering : optimizeLegibility;
+    -webkit-font-smoothing: subpixel-antialiased;
+    text-shadow: 0 0 -1px rgba(0,0,0,0.03);
+    -moz-transform : translate3d(0,0,0);
+    -webkit-transform : translate3d(0,0,0);
+    -o-transform : translate3d(0,0,0);
+    -ms-transform : translate3d(0,0,0);
+    transform : translate3d(0,0,0);
 }
 
 body *{
-	max-width : 100%;
+    max-width : 100%;
 }
 
 h1{
-	font-size : 5rem;
+    font-size : 5rem;
 }
 
 h2{
-	font-size : 4.2rem;
+    font-size : 4.2rem;
 }
 
 h3{
-	font-size : 3.4rem;
-	line-height : 3.8rem;
+    font-size : 3.4rem;
+    line-height : 3.8rem;
+}
+
+h4{
+    font-size: 2.2rem;
+    line-height: 2.6rem;
 }
 
 p{
@@ -91,19 +97,6 @@ li{
     -ms-hyphens: auto;
     -o-hyphens: auto;
     hyphens: auto;
-}
-
-
-a:not(.show){
-    text-decoration : none;
-    color : inherit;
-}
-a.show{
-    color: inherit;
-    
-    &:hover{
-        text-decoration: none;
-    }
 }
 
 ul{

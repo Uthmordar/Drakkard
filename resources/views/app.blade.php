@@ -10,6 +10,7 @@
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+         <link href='http://fonts.googleapis.com/css?family=Quicksand:400, 300' rel='stylesheet' type='text/css'>
         @yield('style')
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
