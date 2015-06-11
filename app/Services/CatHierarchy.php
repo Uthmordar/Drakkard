@@ -17,7 +17,7 @@ class CatHierarchy{
             $result[$cat->id]=['name'=>$cat->name, 'count'=>$cat->card_count];
             $secondCat=Category::where('parent_id', '=', $cat->id)->get();
             foreach($secondCat as $c){
-                $result[$cat->id]['children'][]=['id'=>$c->id, 'name'=>$c->name, 'count'=>$c->card_count];
+                $result[$cat->id]['children'][$c->id]=['name'=>$c->name, 'count'=>$c->card_count];
             }
         }
         return $result;

@@ -7,16 +7,19 @@ use Illuminate\Http\Request;
 use Drakkard\Card;
 use Drakkard\Category;
 use Drakkard\Services\CardatorServices;
+use Drakkard\Services\CatHierarchy;
 
 class CardController extends Controller {
     private $card;
     private $cardator;
     private $category;
+    private $catH;
     
-    public function __construct(Card $card, CardatorServices $cardator, Category $category){
+    public function __construct(Card $card, CardatorServices $cardator, Category $category, CatHierarchy $cat){
         $this->card=$card;
         $this->cardator=$cardator;
         $this->category=$category;
+        $this->catH=$cat;
         $this->middleware('auth');
     }
     /**
@@ -74,7 +77,10 @@ class CardController extends Controller {
      */
     public function show($id)
     {
-            //
+        $card=Card::findOrFail($id);
+        $card->card=unserialize($card->card);
+        $catMenu=$this->catH->getHierarchy();
+        return view('card/show', compact('card', 'catMenu'));
     }
 
     /**

@@ -90,4 +90,10 @@ class Card extends Model {
             $this->users()->detach(Auth::user());
         }
     }
+    
+    public function bindUser(){
+        if(!$this->users()->find(Auth::user()->id)){
+            $this->users()->attach(Auth::user());
+        }
+    }
 }

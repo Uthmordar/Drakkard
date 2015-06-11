@@ -1,10 +1,7 @@
 @import 'mixin.less';
 
-//---------------------------------------
-// CONST
-//---------------------------------------
-
-//1.2rem for arial
+@btn-font-weight: 300;
+@font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
 @font-size : 1.4rem;
 
 @font-family-default : 'Quicksand', sans-serif;
@@ -12,9 +9,21 @@
 @bg-body-color : lighten(#9FA1A3, 20%);
 
 @color-black : darken(#161E28, 5%);
-@color-red : #351A21;
-@color-green : #1F3F33;
+@color-red : #BB113D;
+@color-green : #449d44;
 @color-purple : #2E1F3F;
+@color-blue: #337AB7;
+
+@color-action: #3338B7;
+@color-broadcast: #337AB7;
+@color-creative: #33B7B2;
+@color-event: #38B733;
+@color-intangible: #7AB733;
+@color-medical: #B7B233;
+@color-organization: #B77033;
+@color-person: #B73338;
+@color-place: #B7337A;
+@color-product: #B233B7;
 
 @color-grey : #9FA1A3;
 
@@ -32,7 +41,8 @@ html{
 }
 		
 body{
-    width : 100%;	
+    width : 100%;
+    position: relative;
     /* ligature */
     -moz-font-feature-settings: "liga=1, dlig=1"; 
     -moz-font-feature-settings: "liga", "dlig"; /* pour FF 15+ */

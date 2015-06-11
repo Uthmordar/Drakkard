@@ -37,6 +37,13 @@ class HomeController extends Controller {
         $card=Card::findOrFail($id);
         $card->unbindUser();
         \Session::flash('messageCardCreate', "<p class='success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>Card remove with success from your personal space.</p>");
-        return \Redirect::to('home');
+        return \Redirect::back();
+    }
+    
+    public function attachCard($id){
+        $card=Card::findOrFail($id);
+        $card->bindUser();
+        \Session::flash('messageCardCreate', "<p class='success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>Card add to your personal space.</p>");
+        return \Redirect::back();
     }
 }

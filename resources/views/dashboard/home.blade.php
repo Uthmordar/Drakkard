@@ -83,7 +83,7 @@
 <aside id="categories-menu">
     <nav>
         <ul>
-            <li><a href='{{url('/')}}'>All</a></li>
+            <li><a href='{{route('category.index')}}'>All</a></li>
             @foreach($catMenu as $id=>$firstLevel)
             <li>
                 <a href="{{route('category.show', ['id'=>$id])}}" class='color-{{$firstLevel['name']}}'>{{$firstLevel['name']}}({{$firstLevel['count']}})</a>

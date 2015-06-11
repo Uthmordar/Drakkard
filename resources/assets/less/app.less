@@ -11,7 +11,7 @@
 
 @color-black : darken(#161E28, 5%);
 @color-red : #BB113D;
-@color-green : #1F3F33;
+@color-green : #449d44;
 @color-purple : #2E1F3F;
 @color-blue: #337AB7;
 
@@ -39,6 +39,9 @@
 .bg-blue{
     background-color: @color-blue;
 }
+.bg-green{
+    background-color: @color-green;
+}
 
 body, label, .checkbox label {
     font-weight: 400;
@@ -54,94 +57,6 @@ body, label, .checkbox label {
 
 .pagination{
     margin: 0.5rem 0;
-}
-
-.card{
-    position: relative;
-    display: inline-block;
-    background-color: @bg-body-color;
-    width: 350px;
-    height: 350px;
-    margin: 1rem 1rem 0 0;
-    overflow: hidden;
-
-    .text-content{
-        padding: 2*@padding;
-    }
-
-    h4{
-        margin-bottom: 0.7rem;
-    }
-
-    .nav-card{
-        position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
-        opacity: 0;
-        display: block;
-        margin: 0;
-        padding: 0;
-        .transition(opacity, 1s, ease-out, 0s);
-
-        li{
-            margin-bottom: 0.4rem;
-
-            .link-nav-card{
-                width: 3rem;
-                height: 3rem;
-                color: lighten(@bg-body-color, 15%);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 50%;
-                border: 2px solid lighten(@bg-body-color, 15%);
-            }
-        }
-    }
-
-    &:hover .nav-card{
-        opacity: 1;
-    }
-
-    .cat-list{
-        margin: 0.7rem;
-        padding: 0;
-
-        li{
-            display: inline-block;
-            margin: 0 0.4rem;
-        }
-    }
-
-    .media-block{
-        position: absolute;
-        bottom: 0;
-        height: 233px;
-        width: 100%;
-        
-        .image-prop{
-            width: 100%;
-            height: 233px;
-            background-size: cover;
-
-            &.image-multiple{
-                height: 153px;
-            }
-        }
-
-        .list-image{
-            margin: 0;
-            padding: 0;
-            display: flex;
-            max-height: 80px;
-
-            li{
-                cursor: pointer;
-                overflow: hidden;
-                border: 2px solid lighten(@bg-body-color, 15%);
-            }
-        }
-    }
 }
 
 #categories-menu{
@@ -199,6 +114,9 @@ body, label, .checkbox label {
     color: @color-product;
 }
 
+.bg-Thing{
+    background-color: @bg-body-color;
+}
 .bg-Action, .bg-AchieveAction, .bg-AssessAction, .bg-ConsumeAction, .bg-ControlAction, .bg-CreateAction, 
 .bg-FindAction, .bg-InteractAction, .bg-MoveAction, .bg-OrganizeAction, .bg-PlayAction, .bg-SearchAction, .bg-TradeAction, 
 .bg-TransferAction, .bg-UpdateAction{
@@ -234,4 +152,142 @@ body, label, .checkbox label {
 }
 .bg-Product, .bg-Vehicle{
     background: lighten(@color-product, 40%);
+}
+
+/* Mini Card */
+.card{
+    position: relative;
+    display: inline-block;
+    width: 350px;
+    height: 350px;
+    margin: 1rem 1rem 0 0;
+    overflow: hidden;
+
+    .text-content{
+        padding: 2*@padding;
+    }
+
+    h4{
+        margin-bottom: 0.7rem;
+    }
+
+    .nav-card{
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        opacity: 0;
+        display: block;
+        margin: 0;
+        padding: 0;
+        .transition(opacity, 1s, ease-out, 0s);
+
+        li{
+            margin-bottom: 0.4rem;
+
+            .link-nav-card{
+                width: 3rem;
+                height: 3rem;
+                color: lighten(@bg-body-color, 15%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: 2px solid lighten(@bg-body-color, 15%);
+                text-decoration: none;
+            }
+        }
+    }
+
+    &:hover .nav-card{
+        opacity: 1;
+    }
+
+    .cat-list{
+        margin: 0.7rem;
+        padding: 0;
+
+        li{
+            display: inline-block;
+            margin: 0 0.4rem;
+        }
+    }
+
+    .media-block{
+        position: absolute;
+        bottom: 0;
+        height: 233px;
+        width: 100%;
+        
+        .image-prop{
+            width: 100%;
+            height: 233px;
+            background-size: cover;
+
+            &.image-multiple{
+                height: 153px;
+            }
+        }
+
+        .list-image{
+            margin: 0;
+            padding: 0;
+            display: flex;
+            max-height: 80px;
+
+            li{
+                cursor: pointer;
+                overflow: hidden;
+                border: 2px solid lighten(@bg-body-color, 15%);
+            }
+        }
+    }
+}
+
+/* Big Card */
+.big-card{
+    position: relative;
+    width: 100%;
+    margin: @margin;
+    padding: 2*@padding;
+
+    .text-content{
+        padding: 2*@padding;
+    }
+
+
+    .nav-card{
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        display: block;
+        margin: 0;
+        padding: 0;
+
+        li{
+            display: inline-block;
+            margin-bottom: 0.4rem;
+
+            .link-nav-card{
+                width: 3rem;
+                height: 3rem;
+                color: lighten(@bg-body-color, 15%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: 2px solid lighten(@bg-body-color, 15%);
+                text-decoration: none;
+            }
+        }
+    }
+    
+    .cat-list{
+        margin: 0.7rem;
+        padding: 0;
+
+        li{
+            display: inline-block;
+            margin: 0 0.4rem;
+        }
+    }
 }
