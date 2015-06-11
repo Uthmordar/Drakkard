@@ -170,7 +170,7 @@ body, label, .checkbox label {
     h4{
         margin-bottom: 0.7rem;
     }
-
+    
     .nav-card{
         position: absolute;
         top: 0.5rem;
@@ -253,8 +253,23 @@ body, label, .checkbox label {
     .text-content{
         padding: 2*@padding;
     }
+    
+    h2{
+        margin: 0 0 @margin;
+    }
 
-
+    ul{
+        padding: 0;
+        
+        ul:not(.no-padding){
+            padding-left: 4*@padding;
+        }
+        
+        .ln-bl{
+            display: inline-block;
+        }
+    }
+    
     .nav-card{
         position: absolute;
         top: 0.5rem;

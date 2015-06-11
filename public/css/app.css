@@ -6670,6 +6670,18 @@ label,
 .big-card .text-content {
   padding: 1rem;
 }
+.big-card h2 {
+  margin: 0 0 1rem;
+}
+.big-card ul {
+  padding: 0;
+}
+.big-card ul ul:not(.no-padding) {
+  padding-left: 2rem;
+}
+.big-card ul .ln-bl {
+  display: inline-block;
+}
 .big-card .nav-card {
   position: absolute;
   top: 0.5rem;

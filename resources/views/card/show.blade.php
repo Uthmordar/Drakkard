@@ -40,7 +40,7 @@
             </ul>
             <div class="text-content">
                 @if($card->card->name)
-                    <h4 class="text-uppercase">{{(is_array($card->card->name))? $card->card->name[0] : $card->card->name }}</h4>
+                    <h2 class="text-uppercase">{{(is_array($card->card->name))? $card->card->name[0] : $card->card->name }}</h2>
                 @endif
                 <span>Source: <a href="{!! (is_array($card->url))? $card->url[0] : $card->url !!}" class="card-source">{{(is_array($card->url))? $card->url[0] : $card->url}}</a></span>
                 <ul class='cat-list'>
@@ -48,21 +48,92 @@
                 <li><a href="{{route('category.show', ['id'=>$cat->id])}}">{!! $cat->name !!}</a></li>
                 @endforeach
                 </ul>
-                @if(!$card->card->image && !$card->card->video && $card->card->description)
-                <p>{{$card->card->description}}</p>
-                @endif
+                <section>
+                    <ul>
+                    @foreach($card->card->properties as $p)
+                        @if(!in_array($p, ['name', 'url', 'image', 'video']))
+                        <li class='properties'>
+                            @if(is_array($card->card->$p))
+                            <span class='bold'>{{TplFilters::toNormal($p)}}</span> :
+                            <ul class='no-padding'>
+                                @foreach($card->card->$p as $r)
+                                    @if(is_object($r))
+                                        @if($r instanceof \Datetime)
+                                        <li>{{$r->format("d-m-Y H:i:s")}}</li>
+                                        @else
+                                        <?php $subCard=$r; ?>
+                                        <li class='ln-bl'>
+                                            <article class="card bg-{{$subCard->getQualifiedName()}} bg-{{$subCard->getDirectParent()}}">
+                                                <div class="text-content">
+                                                    @if($subCard->name)
+                                                        <h4 class="text-uppercase">{{(is_array($subCard->name))? $subCard->name[0] : $subCard->name }}</h4>
+                                                    @endif
+                                                    <span>Source: <a href="{!! (is_array($subCard->url))? $subCard->url[0] : $subCard->url !!}" class="card-source">{{(is_array($subCard->url))? $subCard->url[0] : $subCard->url}}</a></span>
+                                                    @if(!$subCard->image && !$subCard->video && $subCard->description)
+                                                    <p>{{$subCard->description}}</p>
+                                                    @endif
+                                                </div>
+                                                @if($subCard->image && !$subCard->video)
+                                                <section class="media-block">
+                                                    @if(is_array($subCard->image))
+                                                        <div class="image-prop image-multiple" style="background: url('{{$subCard->image[0]}}') no-repeat center;"></div>
+                                                        <ul class='list-image'>
+                                                            @foreach($subCard->image as $src)
+                                                            <li><img src='{{$src}}'/></li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @else
+                                                        <div class="image-prop" style="background: url('{{$subCard->image}}')no-repeat center;"></div>
+                                                    @endif
+                                                </section>
+                                                @endif
+                                                @if($subCard->video)
+                                                <section class="media-block">
+                                                    @if(strpos($subCard->video, 'youtube'))
+                                                        <iframe width="100%" height="233" src="{{$subCard->video}}" frameborder="0"></iframe>
+                                                    @else
+                                                        <video>
+                                                            @foreach($subCard->video as $vid)
+                                                                <source src='{{$vid}}'/>
+                                                            @endforeach
+                                                        </video>
+                                                    @endif
+                                                </section>
+                                                @endif
+                                            </article>
+                                        </li>
+                                        @endif
+                                    @else
+                                    <li>{!!TplFilters::urlFormat($r)!!}</li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                            @else
+                            <span class='bold'>{{TplFilters::toNormal($p)}}</span> : 
+                                @if(is_object($card->card->$p))
+                                    @if($card->card->$p instanceof \Datetime)
+                                    {{$card->card->$p->format("d-m-Y H:i:s")}}
+                                    @endif
+                                @else
+                                {!!TplFilters::urlFormat($card->card->$p)!!}
+                                @endif
+                            @endif
+                        </li>
+                        @endif
+                    @endforeach
+                    </ul>
+                </section>
             </div>
             @if($card->card->image && !$card->card->video)
             <section class="media-block">
                 @if(is_array($card->card->image))
-                    <div class="image-prop image-multiple" style="background: url('{{$card->card->image[0]}}') no-repeat center;"></div>
                     <ul class='list-image'>
                         @foreach($card->card->image as $src)
                         <li><img src='{{$src}}'/></li>
                         @endforeach
                     </ul>
                 @else
-                    <div class="image-prop" style="background: url('{{$card->card->image}}')no-repeat center;"></div>
+                    <img src='{{$card->card->image}}' />
                 @endif
             </section>
             @endif

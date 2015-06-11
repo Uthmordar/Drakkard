@@ -197,7 +197,8 @@ return [
                 'CardGenerator' => 'Uthmordar\Cardator\Card\CardGenerator',
                 'CardProcessor' => 'Uthmordar\Cardator\Card\CardProcessor',
                 'Cardator'  => 'Uthmordar\Cardator\Cardator',
-                'Parser'    => 'Uthmordar\Cardator\Parser\Parser'
+                'Parser'    => 'Uthmordar\Cardator\Parser\Parser',
+                'TplFilters' => 'Drakkard\Services\TplFilters'
 	],
 
 ];
