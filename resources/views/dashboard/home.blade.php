@@ -42,7 +42,7 @@
                                 <div class="image-prop image-multiple" style="background: url('{{$card->card->image[0]}}') no-repeat center;"></div>
                                 <ul class='list-image'>
                                     @foreach($card->card->image as $src)
-                                    <li><img src='{{$src}}'/></li>
+                                    <li class='sub-image'><img src='{{$src}}'/></li>
                                     @endforeach
                                 </ul>
                             @else
@@ -74,9 +74,15 @@
 @section('script')
 <script type="text/javascript">
     $(function(){
-       $('.link-detach-card').on('click', function(e){
-           return confirm('Unfollow this card ?');
-       });
+        var $this;
+        $('.link-detach-card').on('click', function(e){
+            return confirm('Unfollow this card ?');
+        });
+
+        $('.sub-image').on('click', function(e){
+            $this=$(this);
+            $this.parent().siblings('.image-prop').attr('style', "background: url('"+$this.children().attr('src')+"') no-repeat center;")
+        });
    });
 </script>
 @endsection

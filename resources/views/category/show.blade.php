@@ -82,9 +82,15 @@
 @section('script')
 <script type="text/javascript">
     $(function(){
-       $('.link-detach-card').on('click', function(e){
-           return confirm('Unfollow this card ?');
-       });
+        var $this;
+        $('.link-detach-card').on('click', function(e){
+            return confirm('Unfollow this card ?');
+        });
+       
+        $('.sub-image').on('click', function(e){
+            $this=$(this);
+            $this.parent().siblings('.image-prop').attr('style', "background: url('"+$this.children().attr('src')+"') no-repeat center;")
+        });
    });
 </script>
 @endsection
