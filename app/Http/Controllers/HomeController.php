@@ -36,14 +36,14 @@ class HomeController extends Controller {
     public function detachCard($id){
         $card=Card::findOrFail($id);
         $card->unbindUser();
-        \Session::flash('messageCardCreate', "<p class='success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>Card remove with success from your personal space.</p>");
+        \Session::flash('messageCardCreate', "<p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>Card remove with success from your personal space.</p>");
         return \Redirect::back();
     }
     
     public function attachCard($id){
         $card=Card::findOrFail($id);
         $card->bindUser();
-        \Session::flash('messageCardCreate', "<p class='success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>Card add to your personal space.</p>");
+        \Session::flash('messageCardCreate', "<p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>Card add to your personal space.</p>");
         return \Redirect::back();
     }
 }

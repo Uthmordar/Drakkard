@@ -52,15 +52,24 @@ body, label, .checkbox label {
 }
 .container{
     position: relative;
-    padding-top: 1.5rem;
+    padding-top: 1rem;
 }
 
 .pagination{
     margin: 0.5rem 0;
 }
 
+.message{
+    width: 100%;
+    
+    .glyphicon{
+        margin: 0 0.8*@margin;
+    }
+}
+
 #categories-menu{
     position: absolute;
+    min-width: 105px;
     height: calc(~"100% - 52px");
     padding: 2*@padding;
     left: 0;
@@ -101,7 +110,7 @@ body, label, .checkbox label {
 .color-MedicalStudy, .color-MedicalTest, .color-MedicalTherapy{
     color: @color-medical;
 }
-.color-Organization, .color-EducationnalOrganization, .color-LocalBusiness, .color-PerformingGroup, .color-SportsOrganization{
+.color-Organization, .color-EducationalOrganization, .color-LocalBusiness, .color-PerformingGroup, .color-SportsOrganization{
     color: @color-organization;
 }
 .color-Person{
@@ -141,7 +150,7 @@ body, label, .checkbox label {
 .bg-MedicalStudy, .bg-MedicalTest, .bg-MedicalTherapy{
     background: lighten(@color-medical, 40%);
 }
-.bg-Organization, .bg-EducationnalOrganization, .bg-LocalBusiness, .bg-PerformingGroup, .bg-SportsOrganization{
+.bg-Organization, .bg-EducationalOrganization, .bg-LocalBusiness, .bg-PerformingGroup, .bg-SportsOrganization{
     background: lighten(@color-organization, 40%);
 }
 .bg-Person{
@@ -175,6 +184,7 @@ body, label, .checkbox label {
         position: absolute;
         top: 0.5rem;
         right: 0.5rem;
+        z-index: 1000;
         opacity: 0;
         display: block;
         margin: 0;
@@ -274,6 +284,7 @@ body, label, .checkbox label {
         position: absolute;
         top: 0.5rem;
         right: 0.5rem;
+        z-index: 1000;
         display: block;
         margin: 0;
         padding: 0;

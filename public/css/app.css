@@ -6361,13 +6361,20 @@ label,
 }
 .container {
   position: relative;
-  padding-top: 1.5rem;
+  padding-top: 1rem;
 }
 .pagination {
   margin: 0.5rem 0;
 }
+.message {
+  width: 100%;
+}
+.message .glyphicon {
+  margin: 0 0.8rem;
+}
 #categories-menu {
   position: absolute;
+  min-width: 105px;
   height: calc(100% - 52px);
   padding: 1rem;
   left: 0;
@@ -6450,7 +6457,7 @@ label,
   color: #b7b233;
 }
 .color-Organization,
-.color-EducationnalOrganization,
+.color-EducationalOrganization,
 .color-LocalBusiness,
 .color-PerformingGroup,
 .color-SportsOrganization {
@@ -6542,7 +6549,7 @@ label,
   background: #efeec7;
 }
 .bg-Organization,
-.bg-EducationnalOrganization,
+.bg-EducationalOrganization,
 .bg-LocalBusiness,
 .bg-PerformingGroup,
 .bg-SportsOrganization {
@@ -6581,6 +6588,7 @@ label,
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
+  z-index: 1000;
   opacity: 0;
   display: block;
   margin: 0;
@@ -6686,6 +6694,7 @@ label,
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
+  z-index: 1000;
   display: block;
   margin: 0;
   padding: 0;
@@ -6737,6 +6746,7 @@ html {
 }
 body {
   width: 100%;
+  min-height: 100vh;
   position: relative;
   /* ligature */
   -moz-font-feature-settings: "liga=1, dlig=1";

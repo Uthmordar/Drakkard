@@ -5,9 +5,9 @@
     <section class="w80 center">
         @if(Session::has('messageDash'))
             @if(Session::has('messageType') && Session::get('messageType')=="success")
-            <p class='success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>{{Session::get('messageDash')}}</p>
+            <p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>{{Session::get('messageDash')}}</p>
             @else
-            <p class='error bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>{{Session::get('messageDash')}}</p>
+            <p class='message error bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>{{Session::get('messageDash')}}</p>
             @endif
         @endif
         @if(Auth::check())
@@ -34,9 +34,7 @@
                     <a href="{{route('attachCard', ['id'=>$card->id])}}" class="link-nav-card bg-green"><span class='glyphicon glyphicon-plus'></span></a>
                 </li>
                 @endif
-                <li>
-                    <a href="{{route('card.show', ['id'=>$card->id])}}" class="link-nav-card bg-blue"><span class='glyphicon glyphicon-eye-open'></span></a>
-                </li>
+                <li>Followers: {{count($card->users()->get())}}</li>
             </ul>
             <div class="text-content">
                 @if($card->card->name)
@@ -48,6 +46,10 @@
                 <li><a href="{{route('category.show', ['id'=>$cat->id])}}">{!! $cat->name !!}</a></li>
                 @endforeach
                 </ul>
+                @if($card->card->location)
+                <iframe width="100%" height="450" frameborder="0" style="border:0"
+                src="https://www.google.com/maps/embed/v1/place?q={{urlencode($card->card->location)}}&key={{Config::get('services.google_api_key')}}"></iframe>
+                @endif
                 <section>
                     <ul>
                     @foreach($card->card->properties as $p)
@@ -66,14 +68,18 @@
                                             <article class="card bg-{{$subCard->getQualifiedName()}} bg-{{$subCard->getDirectParent()}}">
                                                 <div class="text-content">
                                                     @if($subCard->name)
-                                                        <h4 class="text-uppercase">{{(is_array($subCard->name))? $subCard->name[0] : $subCard->name }}</h4>
+                                                        <h4 class="text-uppercase">{{(is_array($subCard->name))? utf8_decode($subCard->name[0]) : utf8_decode($subCard->name) }}</h4>
                                                     @endif
                                                     <span>Source: <a href="{!! (is_array($subCard->url))? $subCard->url[0] : $subCard->url !!}" class="card-source">{{(is_array($subCard->url))? $subCard->url[0] : $subCard->url}}</a></span>
-                                                    @if(!$subCard->image && !$subCard->video && $subCard->description)
+                                                    @if(!$subCard->image && !$subCard->video && $subCard->description && !$subCard->location)
                                                     <p>{{$subCard->description}}</p>
                                                     @endif
                                                 </div>
-                                                @if($subCard->image && !$subCard->video)
+                                                @if($subCard->location)
+                                                <iframe width="100%" height="233" frameborder="0" style="border:0"
+                                                src="https://www.google.com/maps/embed/v1/place?q={{urlencode($card->card->location)}}&key={{Config::get('services.google_api_key')}}"></iframe>
+                                                @endif
+                                                @if($subCard->image && !$subCard->video && !$subCard->location)
                                                 <section class="media-block">
                                                     @if(is_array($subCard->image))
                                                         <div class="image-prop image-multiple" style="background: url('{{$subCard->image[0]}}') no-repeat center;"></div>
@@ -87,7 +93,7 @@
                                                     @endif
                                                 </section>
                                                 @endif
-                                                @if($subCard->video)
+                                                @if($subCard->video && !$subcard->location)
                                                 <section class="media-block">
                                                     @if(strpos($subCard->video, 'youtube'))
                                                         <iframe width="100%" height="233" src="{{$subCard->video}}" frameborder="0"></iframe>

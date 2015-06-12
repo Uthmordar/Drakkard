@@ -57,16 +57,16 @@ class CardController extends Controller {
                 $this->card->createCard($c, $card, $this->category);
             }
         }catch(\RuntimeException $e){
-            \Session::flash('messageCardCreate', "<p class='success bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>" . $e->getMessage() . "</p>");
+            \Session::flash('messageCardCreate', "<p class='message success bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>" . $e->getMessage() . "</p>");
             return \Redirect::to('home');
         }catch(\InvalidArgumentException $e){
             $this->card->bindUserByUrl($input['url']);
-            \Session::flash('messageCardCreate', "<p class='success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>" . $e->getMessage() . "</p>");
+            \Session::flash('messageCardCreate', "<p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>" . $e->getMessage() . "</p>");
             return \Redirect::to('home');
         }
         \Session::flash('messageDash', "Card created.");
         \Session::flash('messageType', 'success');
-        return \Redirect::to('home')->with('message', 'success');
+        return \Redirect::back();
     }
 
     /**
