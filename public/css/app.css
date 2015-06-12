@@ -6719,6 +6719,18 @@ label,
   display: inline-block;
   margin: 0 0.4rem;
 }
+.big-card > .media-block li {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 1rem;
+}
 
 html {
   font-size: 62.5%;
