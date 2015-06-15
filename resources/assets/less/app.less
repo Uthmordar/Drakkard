@@ -1,6 +1,23 @@
 @import "bootstrap/bootstrap";
 @import 'mixin.less';
 
+@-webkit-keyframes stripe{
+  0% {background-position: 0 0;}
+  100% {background-position: 50px 50px;}
+}    
+@-moz-keyframes stripe{
+  0% {background-position: 0 0;}
+  100% {background-position: 50px 50px;}
+}    
+@-ms-keyframes stripe{
+  0% {background-position: 0 0;}
+  100% {background-position: 50px 50px;}
+}    
+@keyframes stripe{
+  0%{background-position: 0 0;}
+  100%{background-position: 50px 50px;}
+}
+
 @btn-font-weight: 300;
 @font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
 @font-size : 1.4rem;
@@ -323,6 +340,65 @@ body, label, .checkbox label {
             align-items: center;
             justify-content: center;
             margin-bottom: @margin;
+        }
+    }
+}
+
+input[type="submit"]{
+    &.active{
+        color: #FFF;
+        background-image:
+            -webkit-linear-gradient(
+            -45deg,
+            rgba(81, 166, 134, 1) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(81, 166, 134, 1) 50%,
+            rgba(81, 166, 134, 1) 75%,
+            transparent 75%,
+            transparent
+        );
+        background-image:
+            -moz-linear-gradient(
+            -45deg,
+            rgba(81, 166, 134, 1) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(81, 166, 134, 1) 50%,
+            rgba(81, 166, 134, 1) 75%,
+            transparent 75%,
+            transparent
+        );
+        background-image:
+            -ms-linear-gradient(
+            -45deg,
+            rgba(81, 166, 134, 1) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(81, 166, 134, 1) 50%,
+            rgba(81, 166, 134, 1) 75%,
+            transparent 75%,
+            transparent
+        );
+        background-image:
+            linear-gradient(
+            -45deg,
+            rgba(81, 166, 134, 1) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(81, 166, 134, 1) 50%,
+            rgba(81, 166, 134, 1) 75%,
+            transparent 75%,
+            transparent
+        );
+        -webkit-background-size:50px 50px;
+        -moz-background-size:50px 50px;
+        -ms-background-size:50px 50px;
+        background-size:50px 50px;
+        .animation(stripe; 2s; infinite; linear; normal);
+
+        &:hover{
+            background-color: @color-green;
         }
     }
 }

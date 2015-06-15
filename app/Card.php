@@ -83,6 +83,7 @@ class Card extends Model {
                 $card->users()->attach(Auth::user());
             }
         }
+        return count($cards);
     }
     
     public function unbindUser(){

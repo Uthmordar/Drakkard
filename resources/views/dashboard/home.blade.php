@@ -69,20 +69,69 @@
         @endif
     </section>
 </div>
+<div class="error_container"></div>
 @endsection
 
 @section('script')
 <script type="text/javascript">
-    $(function(){
-        var $this;
-        $('.link-detach-card').on('click', function(e){
-            return confirm('Unfollow this card ?');
-        });
+(function(ctx){
+    "use strict";
+    var token, url, $list, $form, $url, $submit, $notifications;
 
-        $('.sub-image').on('click', function(e){
-            $this=$(this);
-            $this.parent().siblings('.image-prop').attr('style', "background: url('"+$this.children().attr('src')+"') no-repeat center;")
-        });
-   });
+    var formAjax={
+        initialize: function(form){
+            $form=form;
+            $submit=$('input[type="submit"]');
+            $url=$('input[name=url]');
+            $list=$('#my-cards');
+            token=$('input[name=_token]').val();
+            $notifications=$('#notifications');
+            self.bindEvents();
+        },
+        bindEvents: function(){
+            $form.submit(function(e){
+                e.preventDefault();
+                $submit.addClass('active');
+                $url.parent().removeClass('has-error').children('.error-url').remove();
+                url=$url.val();
+
+                $.ajax({
+                    type: "POST",
+                    url : "/card",
+                    data : {
+                        "url": url,
+                        "_token": token
+                    },
+                    success : function(data){
+                        $submit.removeClass('active');
+                        $notifications.html(data.msg);
+                    },
+                    error: function(error){
+                        $('.error_container').html(error.responseText);
+                        $submit.removeClass('active');
+                        $url.parent().addClass('has-error').append('<span class="error-url bg-danger">'+ JSON.parse(error.responseText).url + '</span>');
+                    }
+                },"json");
+                return false;
+            });
+        }
+    };
+
+    ctx.formAjax=formAjax;
+    var self=formAjax;
+})(window);
+
+$(document).ready(function(){
+    var $this;
+    $('.link-detach-card').on('click', function(e){
+        return confirm('Unfollow this card ?');
+    });
+
+    $('.sub-image').on('click', function(e){
+        $this=$(this);
+        $this.parent().siblings('.image-prop').attr('style', "background: url('"+$this.children().attr('src')+"') no-repeat center;")
+    });
+    window.formAjax.initialize($('#formAddCard'));
+});
 </script>
 @endsection

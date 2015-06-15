@@ -1,5 +1,5 @@
 <div id='addCard'>
-    {!!Form::open(['url'=>'card', 'files'=>false, 'method'=>'POST'])!!}
+    {!!Form::open(['url'=>'card', 'files'=>false, 'method'=>'POST', 'id'=>'formAddCard'])!!}
         {!!Session::get('messageCardCreate')!!}
         <div class="form-group {{ ($errors->first('url'))? 'has-error' : '' }}">
             {!!Form::text('url', Input::old('url'), array('placeholder'=>'url to crawl', 'class'=>'form-control', 'required'))!!}

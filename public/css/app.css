@@ -6342,6 +6342,30 @@ button.close {
     display: none !important;
   }
 }
+@-webkit-keyframes stripe {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+@-ms-keyframes stripe {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+@keyframes stripe {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
 .bg-red {
   background-color: #bb113d;
 }
@@ -6739,6 +6763,35 @@ label,
       -ms-flex-pack: center;
           justify-content: center;
   margin-bottom: 1rem;
+}
+input[type="submit"].active {
+  color: #FFF;
+  background-image: linear-gradient(-45deg, #51a686 25%, transparent 25%, transparent 50%, #51a686 50%, #51a686 75%, transparent 75%, transparent);
+  -ms-background-size: 50px 50px;
+  background-size: 50px 50px;
+  -moz-animation-name: stripe;
+  -moz-animation-duration: 2s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -moz-animation-direction: normal;
+  -webkit-animation-name: stripe;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-direction: normal;
+  -webkit-animation-name: stripe;
+          animation-name: stripe;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-direction: normal;
+          animation-direction: normal;
+}
+input[type="submit"].active:hover {
+  background-color: #449d44;
 }
 
 html {
