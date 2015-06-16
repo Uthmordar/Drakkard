@@ -12,14 +12,11 @@ use Drakkard\Services\CardTplGenerator;
 class CardController extends Controller {
     private $card;
     private $cardator;
-    private $category;
     private $catH;
-    private $cardGen;
     
-    public function __construct(Card $card, CardatorServices $cardator, Category $category, CatHierarchy $cat){
+    public function __construct(Card $card, CardatorServices $cardator, CatHierarchy $cat){
         $this->card=$card;
         $this->cardator=$cardator;
-        $this->category=$category;
         $this->catH=$cat;
         $this->middleware('auth');
     }
@@ -49,20 +46,22 @@ class CardController extends Controller {
      */
     public function store(Requests\AddCardRequest $request){
         $input=\Input::all();
-        if(\Request::ajax()){
-            $msg=null;
-            try{
-                $cards=$cards=$this->cardator->storeCardWithCardator($input['url']);
-            }catch(\RuntimeException $e){
-                if(strpos($e->getMessage(), 'Header error')!==false){
-                    $msg="<p class='message success bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>Page currently unavailable, check the given url status. </p>";
-                }else{
-                    $msg="<p class='message success bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>" . $e->getMessage() . "</p>";
-                }
-            }catch(\InvalidArgumentException $e){
-                $cards=$this->card->bindUserByUrl($input['url']);
-                $msg="<p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span> " . count($cards) . " new cards found for this url. " . $e->getMessage() . "</p>";
+        $msgType="success";
+        try{
+            $cardsData=$cards=$this->cardator->storeCardWithCardator($input['url']);
+            $cards=$cardsData['cards'];
+        }catch(\RuntimeException $e){
+            if(strpos($e->getMessage(), 'Header error')!==false){
+                $msg="Page currently unavailable, check the given url status.";
+            }else{
+                $msg=$e->getMessage();
             }
+            $msgType='error';
+        }catch(\InvalidArgumentException $e){
+            $cards=$this->card->bindUserByUrl($input['url']);
+            $msg=count($cards) . " new cards found for this url. " . $e->getMessage();
+        }
+        if(\Request::ajax()){
             $tpl=[];
             if(!empty($cards) && $input['returnTpl']==true){
                 foreach($cards as $card){
@@ -70,27 +69,13 @@ class CardController extends Controller {
                     $tpl[]=CardTplGenerator::generateCardContentAjax($card, ['header-class'=>['text-content'], 'cat-ul-class'=>['cat-list'], 'url-class'=>['card-source']]);
                 }
             }
-            $msg=($msg==null)? "<p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>" . $cards['data']['cards'] . ' cards found in ' . $cards['data']['executionTime'] . "microseconds. Cards created and bind to you.</p>" : $msg;
-            return ['status'=>'success', 'msg'=>$msg, 'tpl'=>$tpl];
-        }else{
-            try{
-                $cards=$cards=$this->cardator->storeCardWithCardator($input['url']);
-            }catch(\RuntimeException $e){
-                if(strpos($e->getMessage(), 'Header error')!==false){
-                    \Session::flash('messageCardCreate', "<p class='message success bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>Page currently unavailable, check the given url status.</p>");
-                }else{
-                    \Session::flash('messageCardCreate', "<p class='message success bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>" . $e->getMessage() . "</p>");
-                }
-                return \Redirect::back();
-            }catch(\InvalidArgumentException $e){
-                $cards=$this->card->bindUserByUrl($input['url']);
-                \Session::flash('messageCardCreate', "<p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span> " . count($cards) . " new cards found for this url. " . $e->getMessage() . "</p>");
-                return \Redirect::back();
-            }
-            \Session::flash('messageDash', "{$cards['data']['cards']} cards found in {$cards['data']['executionTime']} microseconds. Cards created and bind to you.");
-            \Session::flash('messageType', 'success');
-            return \Redirect::back();
+            $msg=(!isset($msg))? $cardsData['data']['cards'] . ' cards found in ' . $cardsData['data']['executionTime'] . "microseconds. Cards created and bind to you." : $msg;
+            return ['status'=>'success', 'msg'=>$msg, 'msgType'=>$msgType, 'tpl'=>$tpl];
         }
+        $msg=(!isset($msg))? "{$cardsData['data']['cards']} cards found in {$cardsData['data']['executionTime']} microseconds. Cards created and bind to you." : $msg;
+        \Session::flash('messageDash', $msg);
+        \Session::flash('messageType', $msgType);
+        return \Redirect::back();
     }
 
     /**

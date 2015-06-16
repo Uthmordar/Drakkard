@@ -243,11 +243,24 @@ body, label, .checkbox label {
         bottom: 0;
         height: 233px;
         width: 100%;
+                
+        &.video-block{
+            border: 5px solid darken(@bg-body-color, 10%);
+            
+            &:after{
+                content: "";
+                position: absolute;
+                top: calc(~"50% - 50px");
+                left: calc(~"50% - 35px");
+                cursor: pointer;
+                border: 50px solid transparent;
+                border-left: 71px solid darken(@bg-body-color, 10%);
+            }
+        }
         
         .image-prop{
             width: 100%;
             height: 233px;
-            background-size: cover;
 
             &.image-multiple{
                 height: 153px;

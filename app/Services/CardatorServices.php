@@ -3,12 +3,15 @@
 namespace Drakkard\Services;
 
 use Drakkard\Card;
+use Drakkard\Category;
 
 class CardatorServices{
     private $card;
+    private $category;
     
-    public function __construct(Card $card){
+    public function __construct(Card $card, Category $category){
         $this->card=$card;
+        $this->category=$category;
     }
     /**
      * 
@@ -18,13 +21,14 @@ class CardatorServices{
     public function storeCardWithCardator($url){
         $this->card->alreadyExist($url);
 
-        $cards=$this->cardator->getCardsFromUrl($url);
+        $cards=$this->getCardsFromUrl($url);
+        $newCards=[];
         foreach($cards['cards'] as $c){
             $card=new Card;
-            $this->card->createCard($c, $card, $this->category);
+            $newCards[]=$this->card->createCard($c, $card, $this->category);
         }
         
-        return $cards;
+        return ['cards'=>$newCards, 'data'=>$cards['data']];
     }
     
     /**

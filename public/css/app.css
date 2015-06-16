@@ -6671,10 +6671,21 @@ label,
   height: 233px;
   width: 100%;
 }
+.card .media-block.video-block {
+  border: 5px solid #b9bbbc;
+}
+.card .media-block.video-block:after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 35px);
+  cursor: pointer;
+  border: 50px solid transparent;
+  border-left: 71px solid #b9bbbc;
+}
 .card .media-block .image-prop {
   width: 100%;
   height: 233px;
-  background-size: cover;
 }
 .card .media-block .image-prop.image-multiple {
   height: 153px;

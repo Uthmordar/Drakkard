@@ -24,74 +24,42 @@
             </section>
         @endif
     </section>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="error_container"></div>
 @endsection
 
 @section('script')
+<script type='text/javascript' src='{{asset('js/min/formAddCard.js')}}'></script>
 <script type="text/javascript">
-(function(ctx){
-    "use strict";
-    var token, url, $list, $form, $url, $submit, $notifications, i, tpl;
-
-    var formAjax={
-        initialize: function(form){
-            $form=form;
-            $submit=$('input[type="submit"]');
-            $url=$('input[name=url]');
-            $list=$('#my-cards');
-            token=$('input[name=_token]').val();
-            $notifications=$('#notifications');
-            self.bindEvents();
-        },
-        bindEvents: function(){
-            $form.submit(function(e){
-                e.preventDefault();
-                $submit.addClass('active');
-                $url.parent().removeClass('has-error').children('.error-url').remove();
-                url=$url.val();
-
-                $.ajax({
-                    type: "POST",
-                    url : "/card",
-                    data : {
-                        "url": url,
-                        "_token": token,
-                        "returnTpl": true
-                    },
-                    success : function(data){
-                        $submit.removeClass('active');
-                        $notifications.html(data.msg);
-                        for(i=0; i<data.tpl.length; i++){
-                            $list.prepend(data.tpl[i]);
-                        }
-                    },
-                    error: function(error){
-                        $('.error_container').html(error.responseText);
-                        $submit.removeClass('active');
-                        $url.parent().addClass('has-error').append('<span class="error-url bg-danger">'+ JSON.parse(error.responseText).url + '</span>');
-                    }
-                },"json");
-                return false;
-            });
-        }
-    };
-
-    ctx.formAjax=formAjax;
-    var self=formAjax;
-})(window);
-
 $(document).ready(function(){
-    var $this;
-    $('.link-detach-card').on('click', function(e){
+    var $this, video, $modal=$('#myModal'), $modalBody=$modal.find('.modal-body');
+    $(document).on('click', '.link-detach-card', function(e){
         return confirm('Unfollow this card ?');
     });
 
-    $('.sub-image').on('click', function(e){
+    $(document).on('click', '.sub-image', function(e){
         $this=$(this);
-        $this.parent().siblings('.image-prop').attr('style', "background: url('"+$this.children().attr('src')+"') no-repeat center;")
+        $this.parent().siblings('.image-prop').attr('style', "background: url('"+$this.children().attr('src')+"') no-repeat center;background-size: cover;")
     });
-    window.formAjax.initialize($('#formAddCard'));
+    $(document).on('click', '.video-block', function(e){
+        $this=$(this);
+        video=$this.children('.video-vignette').attr('data-vid');
+        $modalBody.html("<iframe width='100%' height='400' src='"+video+"' frameborder='0'></iframe>");
+        $modal.modal('show');
+    });
+    window.formAjax.initialize($('#formAddCard'), true);
 });
 </script>
 @endsection

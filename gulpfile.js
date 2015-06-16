@@ -48,3 +48,8 @@ elixir(function(mix) {
         "app.css"
     ], 'public/css/app.css', 'public/css');
 });
+
+elixir(function(mix) {
+    //mix.scripts(['formAddCard.js']);
+    mix.compress('resources/assets/js/formAddCard.js', 'public/js/min');
+});

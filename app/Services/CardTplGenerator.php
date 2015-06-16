@@ -81,9 +81,9 @@ class CardTplGenerator{
     }
     
     public static function addVideo($card, &$tpl){
-        $tpl.="<section class='media-block'>";
+        $tpl.="<section class='media-block video-block'>";
         if(strpos($card->card->video, 'youtube')){
-            $tpl.="<iframe width='100%' height='233' src='{$card->card->video}' frameborder='0'></iframe>";
+            $tpl.="<div class='image-prop video-vignette' data-vid='{$card->card->video}' style='background: url(http://img.youtube.com/vi/" . substr($card->card->video, strrpos($card->card->video, '/')+1). "/0.jpg) no-repeat center;background-size: cover;'></div>";
         }else{
             $tpl.="<video>";
             foreach($card->card->video as $vid){
@@ -97,14 +97,14 @@ class CardTplGenerator{
     public static function addImage($card, &$tpl){
         $tpl.="<section class='media-block'>";
         if(is_array($card->card->image)){
-            $tpl.="<div class='image-prop image-multiple' style='background: url('{$card->card->image[0]}') no-repeat center;'></div>
+            $tpl.="<div class='image-prop image-multiple' style='background: url({$card->card->image[0]}) no-repeat center;background-size: cover;'></div>
             <ul class='list-image'>";
             foreach($card->card->image as $src){
                 $tpl.="<li class='sub-image'><img src='{$src}'/></li>";
             }
             $tpl.="</ul>";
         }else{
-            $tpl.="<div class='image-prop' style='background: url('{$card->card->image}')no-repeat center;'></div>";
+            $tpl.="<div class='image-prop' style='background: url({$card->card->image})no-repeat center;'></div>";
         }
         $tpl.="</section>";
     }

@@ -36,17 +36,25 @@
 @endsection
 
 @section('script')
+<script type='text/javascript' src='{{asset('js/min/formAddCard.js')}}'></script>
 <script type="text/javascript">
-    $(function(){
-        var $this;
-        $('.link-detach-card').on('click', function(e){
-            return confirm('Unfollow this card ?');
-        });
-       
-        $('.sub-image').on('click', function(e){
-            $this=$(this);
-            $this.parent().siblings('.image-prop').attr('style', "background: url('"+$this.children().attr('src')+"') no-repeat center;")
-        });
-   });
+$(document).ready(function(){
+    var $this, video, $modal=$('#myModal'), $modalBody=$modal.find('.modal-body');
+    $(document).on('click', '.link-detach-card', function(e){
+        return confirm('Unfollow this card ?');
+    });
+
+    $(document).on('click', '.sub-image', function(e){
+        $this=$(this);
+        $this.parent().siblings('.image-prop').attr('style', "background: url('"+$this.children().attr('src')+"') no-repeat center;background-size: cover;")
+    });
+    $(document).on('click', '.video-block', function(e){
+        $this=$(this);
+        video=$this.children('.video-vignette').attr('data-vid');
+        $modalBody.html("<iframe width='100%' height='400' src='"+video+"' frameborder='0'></iframe>");
+        $modal.modal('show');
+    });
+    window.formAjax.initialize($('#formAddCard'), false);
+});
 </script>
 @endsection

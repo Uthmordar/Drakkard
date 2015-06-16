@@ -145,11 +145,14 @@
 @endsection
 
 @section('script')
+<script type='text/javascript' src='{{asset('js/min/formAddCard.js')}}'></script>
 <script type="text/javascript">
-    $(function(){
-       $('.link-detach-card').on('click', function(e){
-           return confirm('Unfollow this card ?');
-       });
-   });
+$(document).ready(function(){
+    $(document).on('click', '.link-detach-card', function(e){
+        return confirm('Unfollow this card ?');
+    });
+
+    window.formAjax.initialize($('#formAddCard'), false);
+});
 </script>
 @endsection
