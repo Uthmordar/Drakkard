@@ -7,12 +7,14 @@ use Drakkard\Card;
 use Drakkard\Category;
 use Drakkard\Services\CardatorServices;
 use Drakkard\Services\CatHierarchy;
+use Drakkard\Services\CardTplGenerator;
 
 class CardController extends Controller {
     private $card;
     private $cardator;
     private $category;
     private $catH;
+    private $cardGen;
     
     public function __construct(Card $card, CardatorServices $cardator, Category $category, CatHierarchy $cat){
         $this->card=$card;
@@ -59,22 +61,33 @@ class CardController extends Controller {
                 }
             }catch(\InvalidArgumentException $e){
                 $cards=$this->card->bindUserByUrl($input['url']);
-                $msg="<p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span> " . $cards . " cards found. " . $e->getMessage() . "</p>";
+                $msg="<p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span> " . count($cards) . " new cards found for this url. " . $e->getMessage() . "</p>";
+            }
+            $tpl=[];
+            if(!empty($cards) && $input['returnTpl']==true){
+                foreach($cards as $card){
+                    $card->card=unserialize($card->card);
+                    $tpl[]=CardTplGenerator::generateCardContentAjax($card, ['header-class'=>['text-content'], 'cat-ul-class'=>['cat-list'], 'url-class'=>['card-source']]);
+                }
             }
             $msg=($msg==null)? "<p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>" . $cards['data']['cards'] . ' cards found in ' . $cards['data']['executionTime'] . "microseconds. Cards created and bind to you.</p>" : $msg;
-            return ['status'=>'success', 'msg'=>$msg];
+            return ['status'=>'success', 'msg'=>$msg, 'tpl'=>$tpl];
         }else{
             try{
                 $cards=$cards=$this->cardator->storeCardWithCardator($input['url']);
             }catch(\RuntimeException $e){
-                \Session::flash('messageCardCreate', "<p class='message success bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>" . $e->getMessage() . "</p>");
-                return \Redirect::to('home');
+                if(strpos($e->getMessage(), 'Header error')!==false){
+                    \Session::flash('messageCardCreate', "<p class='message success bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>Page currently unavailable, check the given url status.</p>");
+                }else{
+                    \Session::flash('messageCardCreate', "<p class='message success bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>" . $e->getMessage() . "</p>");
+                }
+                return \Redirect::back();
             }catch(\InvalidArgumentException $e){
-                $this->card->bindUserByUrl($input['url']);
-                \Session::flash('messageCardCreate', "<p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>" . $e->getMessage() . "</p>");
-                return \Redirect::to('home');
+                $cards=$this->card->bindUserByUrl($input['url']);
+                \Session::flash('messageCardCreate', "<p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span> " . count($cards) . " new cards found for this url. " . $e->getMessage() . "</p>");
+                return \Redirect::back();
             }
-            \Session::flash('messageDash', "Card created.");
+            \Session::flash('messageDash', "{$cards['data']['cards']} cards found in {$cards['data']['executionTime']} microseconds. Cards created and bind to you.");
             \Session::flash('messageType', 'success');
             return \Redirect::back();
         }

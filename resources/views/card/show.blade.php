@@ -63,8 +63,19 @@
                                                 @if($subCard->location)
                                                 <iframe width="100%" height="233" frameborder="0" style="border:0"
                                                 src="https://www.google.com/maps/embed/v1/place?q={{urlencode($card->card->location)}}&key={{Config::get('services.google_api_key')}}"></iframe>
-                                                @endif
-                                                @if($subCard->image && !$subCard->video && !$subCard->location)
+                                                @elseif($subCard->video)
+                                                <section class="media-block">
+                                                    @if(strpos($subCard->video, 'youtube'))
+                                                        <iframe width="100%" height="233" src="{{$subCard->video}}" frameborder="0"></iframe>
+                                                    @else
+                                                        <video>
+                                                            @foreach($subCard->video as $vid)
+                                                                <source src='{{$vid}}'/>
+                                                            @endforeach
+                                                        </video>
+                                                    @endif
+                                                </section>
+                                                @elseif($subCard->image)
                                                 <section class="media-block">
                                                     @if(is_array($subCard->image))
                                                         <div class="image-prop image-multiple" style="background: url('{{$subCard->image[0]}}') no-repeat center;"></div>
@@ -75,19 +86,6 @@
                                                         </ul>
                                                     @else
                                                         <div class="image-prop" style="background: url('{{$subCard->image}}')no-repeat center;"></div>
-                                                    @endif
-                                                </section>
-                                                @endif
-                                                @if($subCard->video && !$subcard->location)
-                                                <section class="media-block">
-                                                    @if(strpos($subCard->video, 'youtube'))
-                                                        <iframe width="100%" height="233" src="{{$subCard->video}}" frameborder="0"></iframe>
-                                                    @else
-                                                        <video>
-                                                            @foreach($subCard->video as $vid)
-                                                                <source src='{{$vid}}'/>
-                                                            @endforeach
-                                                        </video>
                                                     @endif
                                                 </section>
                                                 @endif

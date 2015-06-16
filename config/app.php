@@ -198,7 +198,8 @@ return [
                 'CardProcessor' => 'Uthmordar\Cardator\Card\CardProcessor',
                 'Cardator'  => 'Uthmordar\Cardator\Cardator',
                 'Parser'    => 'Uthmordar\Cardator\Parser\Parser',
-                'TplFilters' => 'Drakkard\Services\TplFilters'
+                'TplFilters' => 'Drakkard\Services\TplFilters',
+                'CardTplGenerator' => 'Drakkard\Services\CardTplGenerator'
 	],
 
 ];

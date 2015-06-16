@@ -78,12 +78,14 @@ class Card extends Model {
      */
     public function bindUserByUrl($url){
         $cards=Card::where('url', '=', $url)->get();
+        $newCards=[];
         foreach($cards as $card){
             if(!$card->users()->find(Auth::user()->id)){
                 $card->users()->attach(Auth::user());
+                $newCards[]=$card;
             }
         }
-        return count($cards);
+        return $newCards;
     }
     
     public function unbindUser(){
