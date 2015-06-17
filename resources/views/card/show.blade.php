@@ -191,6 +191,9 @@
 <script type='text/javascript' src='{{asset('js/min/formAddCard.js')}}'></script>
 <script type="text/javascript">
 $(document).ready(function(){
+    $(document).on('click', function(e){
+        return false;
+    });
     $(document).on('click', '.link-detach-card', function(e){
         return confirm('Unfollow this card ?');
     });

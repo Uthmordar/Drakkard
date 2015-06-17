@@ -6396,6 +6396,9 @@ label,
 .message .glyphicon {
   margin: 0 0.8rem;
 }
+a.disabled {
+  color: inherent;
+}
 #categories-menu {
   position: absolute;
   min-width: 230px;
