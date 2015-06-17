@@ -34,7 +34,7 @@
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
+				<ul class="nav navbar-nav" style="padding-left: 120px;">
                                     <li><a href="{{route('category.index')}}">Home</a></li>
                                     @if(Auth::check())
                                     <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>

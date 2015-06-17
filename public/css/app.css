@@ -6398,13 +6398,24 @@ label,
 }
 #categories-menu {
   position: absolute;
-  min-width: 105px;
-  height: calc(100% - 52px);
+  min-width: 230px;
+  height: 100%;
   padding: 1rem;
   left: 0;
-  bottom: 0;
+  top: 0;
   background-color: #f8f8f8;
   border-right: 1px solid #E7E7E7;
+}
+#categories-menu .logo {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+#categories-menu .logo a {
+  margin: 0.3rem 0;
 }
 #categories-menu ul {
   padding: 0;

@@ -1,4 +1,7 @@
 <aside id="categories-menu">
+    <div class="logo">
+        <a href="{{url('/dashboard')}}"><img src="{{asset('images/logo_drakkard.png')}}"/></a>
+    </div>
     <nav>
         <ul>
             <li><a href='{{route('category.index')}}'>All</a></li>

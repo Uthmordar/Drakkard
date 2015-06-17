@@ -85,13 +85,22 @@ body, label, .checkbox label {
 
 #categories-menu{
     position: absolute;
-    min-width: 105px;
-    height: calc(~"100% - 52px");
+    min-width: 230px;
+    height: 100%;
     padding: 2*@padding;
     left: 0;
-    bottom: 0;
+    top: 0;
     background-color: #f8f8f8;
     border-right: 1px solid #E7E7E7;
+    
+    .logo{
+        display: flex;
+        justify-content: center;
+        
+        a{
+            margin: 0.3*@margin 0;
+        }
+    }
     
     ul{
         padding: 0;
