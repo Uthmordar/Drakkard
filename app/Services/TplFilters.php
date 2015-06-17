@@ -9,10 +9,14 @@ class TplFilters{
     
     public static function urlFormat($str){
         if(filter_var($str, FILTER_VALIDATE_URL)){
-            if(getimagesize($str)){
-                return "<img src='$str'/>";
+            try{
+                if(getimagesize($str)){
+                    return "<img src='$str'/>";
+                }
+                return "<a href='$str'>$str</a>";
+            }catch (\Exception $e){
+                return "(status error) : <a href='#' class='disabled'>$str</a>";
             }
-            return "<a href='$str'>$str</a>";
         }
         
         return $str;

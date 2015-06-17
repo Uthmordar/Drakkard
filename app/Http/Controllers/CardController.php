@@ -59,7 +59,11 @@ class CardController extends Controller {
             $msgType='error';
         }catch(\InvalidArgumentException $e){
             $cards=$this->card->bindUserByUrl($input['url']);
-            $msg=count($cards) . " new cards found for this url. " . $e->getMessage();
+            if(!count($cards)){
+                $msg="No new cards found. You were already following those cards.";
+            }else{
+                $msg=count($cards) . " new cards found for this url. " . $e->getMessage();
+            }
         }
         if(\Request::ajax()){
             $tpl=[];
@@ -69,10 +73,10 @@ class CardController extends Controller {
                     $tpl[]=CardTplGenerator::generateCardContentAjax($card, ['header-class'=>['text-content'], 'cat-ul-class'=>['cat-list'], 'url-class'=>['card-source']]);
                 }
             }
-            $msg=(!isset($msg))? $cardsData['data']['cards'] . ' cards found in ' . $cardsData['data']['executionTime'] . "microseconds. Cards created and bind to you." : $msg;
+            $msg=(!isset($msg))? $cardsData['data']['cards'] . ' cards found in ' . round($cardsData['data']['executionTime'], 2) . " microseconds. Cards created and bind to you." : $msg;
             return ['status'=>'success', 'msg'=>$msg, 'msgType'=>$msgType, 'tpl'=>$tpl];
         }
-        $msg=(!isset($msg))? "{$cardsData['data']['cards']} cards found in {$cardsData['data']['executionTime']} microseconds. Cards created and bind to you." : $msg;
+        $msg=(!isset($msg))? "{$cardsData['data']['cards']} cards found in " . round($cardsData['data']['executionTime'], 2) . " microseconds. Cards created and bind to you." : $msg;
         \Session::flash('messageDash', $msg);
         \Session::flash('messageType', $msgType);
         return \Redirect::back();

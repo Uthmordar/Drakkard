@@ -6721,6 +6721,9 @@ label,
   margin: 1rem;
   padding: 1rem;
 }
+.big-card .card {
+  box-shadow: 1px 1px 4px #0d1218;
+}
 .big-card .text-content {
   padding: 1rem;
 }
