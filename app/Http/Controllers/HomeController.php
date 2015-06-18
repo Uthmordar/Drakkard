@@ -4,9 +4,11 @@ use Illuminate\Support\Facades\Auth;
 
 use Drakkard\Card;
 use Drakkard\Services\CatHierarchy;
+use Drakkard\Services\AdviceCard;
 
 class HomeController extends Controller {
     private $catH;
+    private $advice;
     
 
     /**
@@ -14,8 +16,9 @@ class HomeController extends Controller {
      *
      * @return void
      */
-    public function __construct(CatHierarchy $catH){
+    public function __construct(CatHierarchy $catH, AdviceCard $advice){
         $this->catH=$catH;
+        $this->advice=$advice;
         $this->middleware('auth');
     }
 
@@ -30,7 +33,18 @@ class HomeController extends Controller {
             $card->card=unserialize($card->card);
         }
         $catMenu=$this->catH->getHierarchy();
-        return view('dashboard/home', compact('cards', 'catMenu'));
+        
+        $adviceList=[];
+        $adviceList['popuplar']=$this->advice->getPopular();
+        foreach($adviceList['popuplar'] as $card){
+            $card->card=unserialize($card->card);
+        }
+        $adviceList['Relatives to your tastes']=$this->advice->getByTaste();
+        foreach($adviceList['Relatives to your tastes'] as $card){
+            $card->card=unserialize($card->card);
+        }
+
+        return view('dashboard/home', compact('cards', 'catMenu', 'adviceList'));
     }
 
     public function detachCard($id){

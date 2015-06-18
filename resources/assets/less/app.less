@@ -115,6 +115,52 @@ a.disabled{
     }
 }
 
+#advice-menu{
+    position: absolute;
+    min-width: 230px;
+    height: calc(~"100% - 52px");
+    padding: 2*@padding;
+    right: 0;
+    bottom: 0;
+    background-color: #f8f8f8;
+    border-left: 1px solid #E7E7E7;
+    
+    ul, li{
+        padding: 0;
+    }
+    
+    .mini-card{
+        position: relative;
+        min-height: 50px;
+        margin-bottom: 1rem;
+        
+        h6{
+            font-size: @font-size * 1.1;
+            margin: 0;
+            padding: @padding * 0.8;
+        }
+        
+        .cat{
+            padding-left: @padding;
+        }
+        
+        .link-nav-card{
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            width: 3rem;
+            height: 3rem;
+            color: lighten(@bg-body-color, 15%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 2px solid lighten(@bg-body-color, 15%);
+            text-decoration: none;
+        }
+    }
+}
+
 .color-Action, .color-AchieveAction, .color-AssessAction, .color-ConsumeAction, .color-ControlAction, .color-CreateAction, 
 .color-FindAction, .color-InteractAction, .color-MoveAction, .color-OrganizeAction, .color-PlayAction, .color-SearchAction, .color-TradeAction, 
 .color-TransferAction, .color-UpdateAction{
