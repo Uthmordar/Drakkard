@@ -191,7 +191,7 @@
 <script type='text/javascript' src='{{asset('js/min/formAddCard.js')}}'></script>
 <script type="text/javascript">
 $(document).ready(function(){
-    $(document).on('click', function(e){
+    $(document).on('click', '.disabled', function(e){
         return false;
     });
     $(document).on('click', '.link-detach-card', function(e){

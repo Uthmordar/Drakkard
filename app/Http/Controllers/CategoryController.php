@@ -1,37 +1,57 @@
-<?php namespace Drakkard\Http\Controllers;
+<?php
+
+namespace Drakkard\Http\Controllers;
 
 use Drakkard\Http\Requests;
 use Drakkard\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
+use Drakkard\Services\AdviceCard;
 use Drakkard\Category;
 use Drakkard\Card;
 use Drakkard\Services\CatHierarchy;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller {
+
     private $catH;
+    private $advice;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(CatHierarchy $catH){
-        $this->catH=$catH;
+    public function __construct(CatHierarchy $catH, AdviceCard $advice) {
+        $this->catH = $catH;
+        $this->advice = $advice;
+        $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index()
-    {
-        $cards=Card::orderBy('updated_at', 'desc')->paginate(6);
-        foreach($cards as $card){
-            $card->card=unserialize($card->card);
+    public function index() {
+        $cards = Card::orderBy('updated_at', 'desc')->paginate(6);
+        foreach ($cards as $card) {
+            $card->card = unserialize($card->card);
         }
-        $catMenu=$this->catH->getHierarchy();
-        return view('category/show', compact('cards', 'catMenu'));
+        $catMenu = $this->catH->getHierarchy();
+
+        $adviceList = [];
+        if (Auth::check()) {
+            $adviceList['popuplar'] = $this->advice->getPopular();
+            foreach ($adviceList['popuplar'] as $card) {
+                $card->card = unserialize($card->card);
+            }
+            $adviceList['Relatives to your tastes'] = $this->advice->getByTaste();
+            foreach ($adviceList['Relatives to your tastes'] as $card) {
+                $card->card = unserialize($card->card);
+            }
+        }
+
+        return view('category/show', compact('cards', 'catMenu', 'adviceList'));
     }
 
     /**
@@ -39,9 +59,8 @@ class CategoryController extends Controller {
      *
      * @return Response
      */
-    public function create()
-    {
-            //
+    public function create() {
+        //
     }
 
     /**
@@ -49,9 +68,8 @@ class CategoryController extends Controller {
      *
      * @return Response
      */
-    public function store()
-    {
-            //
+    public function store() {
+        //
     }
 
     /**
@@ -60,14 +78,26 @@ class CategoryController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
-    {
-        $cards=Category::findOrFail($id)->cards()->orderBy('updated_at', 'desc')->paginate(6);
-        foreach($cards as $card){
-            $card->card=unserialize($card->card);
+    public function show($id) {
+        $cards = Category::findOrFail($id)->cards()->orderBy('updated_at', 'desc')->paginate(6);
+        foreach ($cards as $card) {
+            $card->card = unserialize($card->card);
         }
-        $catMenu=$this->catH->getHierarchy();
-        return view('category/show', compact('cards', 'catMenu'));
+        $catMenu = $this->catH->getHierarchy();
+
+        $adviceList = [];
+        if (Auth::check()) {
+            $adviceList['popuplar'] = $this->advice->getPopular();
+            foreach ($adviceList['popuplar'] as $card) {
+                $card->card = unserialize($card->card);
+            }
+            $adviceList['Relatives to your tastes'] = $this->advice->getByTaste();
+            foreach ($adviceList['Relatives to your tastes'] as $card) {
+                $card->card = unserialize($card->card);
+            }
+        }
+
+        return view('category/show', compact('cards', 'catMenu', 'adviceList'));
     }
 
     /**
@@ -76,9 +106,8 @@ class CategoryController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
-    {
-            //
+    public function edit($id) {
+        //
     }
 
     /**
@@ -87,9 +116,8 @@ class CategoryController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
-    {
-            //
+    public function update($id) {
+        //
     }
 
     /**
@@ -98,8 +126,8 @@ class CategoryController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
-    {
-            //
+    public function destroy($id) {
+        //
     }
+
 }

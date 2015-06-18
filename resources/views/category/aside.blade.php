@@ -8,11 +8,11 @@
             @if(!empty($catMenu))
                 @foreach($catMenu as $id=>$firstLevel)
                 <li >
-                    <a href="{{route('category.show', ['id'=>$id])}}" class='color-{{$firstLevel['name']}}'>{{$firstLevel['name']}}({{$firstLevel['count']}})</a>
+                    <a href="{{route('category.show', ['id'=>$id])}}" class='color-{{$firstLevel['name']}}'>{{ucfirst(TplFilters::toNormal($firstLevel['name']))}}({{$firstLevel['count']}})</a>
                     @if(!empty($firstLevel['children']))
                     <ul>
                         @foreach($firstLevel['children'] as $cId=>$child)
-                        <li><a href="{{route('category.show', ['id'=>$cId])}}" class='color-{{$child['name']}} color-{{$firstLevel['name']}}'>{{$child['name']}}({{$child['count']}})</a></li>
+                        <li><a href="{{route('category.show', ['id'=>$cId])}}" class='color-{{$child['name']}} color-{{$firstLevel['name']}}'>{{ucfirst(TplFilters::toNormal($child['name']))}}({{$child['count']}})</a></li>
                         @endforeach
                     </ul>
                     @endif

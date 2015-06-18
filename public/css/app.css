@@ -6513,7 +6513,8 @@ a.disabled {
 .color-UserInteraction {
   color: #38b733;
 }
-.color-Intagible,
+.color-Intangible,
+.color-ContactPoint,
 .color-Audience,
 .color-BroadcastChannel,
 .color-Enumeration,
@@ -6542,6 +6543,7 @@ a.disabled {
   color: #b7b233;
 }
 .color-Organization,
+.color-Hotel,
 .color-EducationalOrganization,
 .color-LocalBusiness,
 .color-PerformingGroup,
@@ -6606,6 +6608,7 @@ a.disabled {
   background: #c8efc7;
 }
 .bg-Intagible,
+.bg-ContactPoint,
 .bg-Audience,
 .bg-BroadcastChannel,
 .bg-Enumeration,
@@ -6634,6 +6637,7 @@ a.disabled {
   background: #efeec7;
 }
 .bg-Organization,
+.bg-Hotel,
 .bg-EducationalOrganization,
 .bg-LocalBusiness,
 .bg-PerformingGroup,

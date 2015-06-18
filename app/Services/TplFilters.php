@@ -8,6 +8,9 @@ class TplFilters{
     }
     
     public static function urlFormat($str){
+        if(strpos($str, 'tel:')!==false){
+            return "<a href='$str'>+" . trim(urldecode(substr($str, strpos($str, 'tel:')+4))) . "</a>";
+        }
         if(filter_var($str, FILTER_VALIDATE_URL)){
             try{
                 if(getimagesize($str)){

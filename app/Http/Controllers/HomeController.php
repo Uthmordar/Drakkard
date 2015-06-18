@@ -1,24 +1,25 @@
-<?php namespace Drakkard\Http\Controllers;
+<?php
+
+namespace Drakkard\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-
 use Drakkard\Card;
 use Drakkard\Services\CatHierarchy;
 use Drakkard\Services\AdviceCard;
 
 class HomeController extends Controller {
+
     private $catH;
     private $advice;
-    
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(CatHierarchy $catH, AdviceCard $advice){
-        $this->catH=$catH;
-        $this->advice=$advice;
+    public function __construct(CatHierarchy $catH, AdviceCard $advice) {
+        $this->catH = $catH;
+        $this->advice = $advice;
         $this->middleware('auth');
     }
 
@@ -27,37 +28,38 @@ class HomeController extends Controller {
      *
      * @return Response
      */
-    public function index(){
-        $cards=Auth::user()->cards()->orderBy('updated_at', 'desc')->paginate(6);
-        foreach($cards as $card){
-            $card->card=unserialize($card->card);
+    public function index() {
+        $cards = Auth::user()->cards()->orderBy('updated_at', 'desc')->paginate(6);
+        foreach ($cards as $card) {
+            $card->card = unserialize($card->card);
         }
-        $catMenu=$this->catH->getHierarchy();
-        
-        $adviceList=[];
-        $adviceList['popuplar']=$this->advice->getPopular();
-        foreach($adviceList['popuplar'] as $card){
-            $card->card=unserialize($card->card);
+        $catMenu = $this->catH->getHierarchy();
+
+        $adviceList = [];
+        $adviceList['popuplar'] = $this->advice->getPopular();
+        foreach ($adviceList['popuplar'] as $card) {
+            $card->card = unserialize($card->card);
         }
-        $adviceList['Relatives to your tastes']=$this->advice->getByTaste();
-        foreach($adviceList['Relatives to your tastes'] as $card){
-            $card->card=unserialize($card->card);
+        $adviceList['Relatives to your tastes'] = $this->advice->getByTaste();
+        foreach ($adviceList['Relatives to your tastes'] as $card) {
+            $card->card = unserialize($card->card);
         }
 
         return view('dashboard/home', compact('cards', 'catMenu', 'adviceList'));
     }
 
-    public function detachCard($id){
-        $card=Card::findOrFail($id);
+    public function detachCard($id) {
+        $card = Card::findOrFail($id);
         $card->unbindUser();
         \Session::flash('messageCardCreate', "<p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>Card remove with success from your personal space.</p>");
         return \Redirect::back();
     }
-    
-    public function attachCard($id){
-        $card=Card::findOrFail($id);
+
+    public function attachCard($id) {
+        $card = Card::findOrFail($id);
         $card->bindUser();
         \Session::flash('messageCardCreate', "<p class='message success bg-success'><span class='glyphicon glyphicon-ok' style='color:green;'></span>Card add to your personal space.</p>");
         return \Redirect::back();
     }
+
 }

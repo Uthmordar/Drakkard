@@ -3,6 +3,7 @@ namespace Drakkard\Services;
 
 use Drakkard\Card;
 use Illuminate\Support\Facades\Config;
+use Drakkard\Services\TplFilters;
 
 class CardTplGenerator{
     public static function generateCardContent(Card $card, $params=[]){
@@ -36,15 +37,17 @@ class CardTplGenerator{
     }
     
     public static function addName($card, &$tpl){
+        $tpl.="<h4 class='text-uppercase'>";
         if($card->card->name){
-            $tpl.="<h4 class='text-uppercase'>";
             if(is_array($card->card->name)){
                 $tpl.=$card->card->name[0];
             }else{
                 $tpl.=$card->card->name;
             }
-            $tpl.="</h4>";
+        }else{
+            $tpl.=TplFilters::toNormal($card->card->getQualifiedName());
         }
+        $tpl.="</h4>";
     }
     
     public static function addUrl($card, &$tpl, $params){
@@ -55,7 +58,7 @@ class CardTplGenerator{
     public static function addCat($card, &$tpl, $params){
         $tpl.="<ul class='". implode(' ', $params['cat-ul-class']) . "'>";
         foreach($card->categories()->get() as $cat){
-            $tpl.="<li><a href='" .route('category.show', ['id'=>$cat->id]) . "'>$cat->name</a></li>";
+            $tpl.="<li><a href='" .route('category.show', ['id'=>$cat->id]) . "'>" . ucfirst(TplFilters::toNormal($cat->name)) . "</a></li>";
         }
         $tpl.="</ul>";
     }
@@ -69,6 +72,8 @@ class CardTplGenerator{
     public static function addCardContent($card, &$tpl){
         if($card->card->location){
             self::addLocation($card, $tpl);
+        }elseif($card->card->streetAddress){
+            self::addStreetAddress($card, $tpl);
         }elseif($card->card->video){
             self::addVideo($card, $tpl);
         }elseif($card->card->image){
@@ -78,6 +83,10 @@ class CardTplGenerator{
     
     public static function addLocation($card, &$tpl){
         $tpl.="<iframe width='100%' height='233' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?q=" . urlencode($card->card->location) . "&key=" . Config::get('services.google_api_key'). "'></iframe>";
+    }
+    
+    public static function addStreetAddress($card, &$tpl){
+        $tpl.="<div class='text-content'><p>Location: <a href='{$card->card->streetAddress}'>Google map</a></p></div>";
     }
     
     public static function addVideo($card, &$tpl){
