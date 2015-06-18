@@ -35,8 +35,11 @@
                             msg="<p class='message success bg-danger'><span class='glyphicon glyphicon-remove' style='color:red;'></span>" + data.msg + "</p>";
                         }
                         $notifications.html(msg);
-                        for(i=0; i<data.tpl.length; i++){
-                            $list.prepend(data.tpl[i]);
+                        i=0;
+                        while(data.tpl.length>0 && i<6){
+                            $list.prepend(data.tpl.pop());
+                            $list.find('.card').last().remove();
+                            i++;
                         }
                     },
                     error: function(error){
