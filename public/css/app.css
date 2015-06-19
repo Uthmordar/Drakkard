@@ -6410,6 +6410,7 @@ a.disabled {
   top: 0;
   background-color: #f8f8f8;
   border-right: 1px solid #E7E7E7;
+  z-index: 100000;
 }
 #categories-menu .logo {
   display: -webkit-flex;
