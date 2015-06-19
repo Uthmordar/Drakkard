@@ -1,5 +1,5 @@
 <?php
-var_dump(env('DB_DATABASE'));die();
+
 return [
 
 	/*
