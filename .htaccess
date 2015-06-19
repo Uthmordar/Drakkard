@@ -1,0 +1,12 @@
+SetEnv PHP_VER 5_4
+Options +FollowSymLinks -MultiViews
+# Turn mod_rewrite on
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^(app|bootstrap|config|database|node_modules|resources|storage|tests|vendor|workbench)(/.*|)$ - [NC,F]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^Public/(.*)$ /Public/Index.php/$1 [L,NC]

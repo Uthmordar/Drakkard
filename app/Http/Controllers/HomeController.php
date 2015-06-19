@@ -36,8 +36,8 @@ class HomeController extends Controller {
         $catMenu = $this->catH->getHierarchy();
 
         $adviceList = [];
-        $adviceList['popuplar'] = $this->advice->getPopular();
-        foreach ($adviceList['popuplar'] as $card) {
+        $adviceList['popular'] = $this->advice->getPopular();
+        foreach ($adviceList['popular'] as $card) {
             $card->card = unserialize($card->card);
         }
         $adviceList['Relatives to your tastes'] = $this->advice->getByTaste();

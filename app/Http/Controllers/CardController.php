@@ -73,10 +73,10 @@ class CardController extends Controller {
                     $tpl[]=CardTplGenerator::generateCardContentAjax($card, ['header-class'=>['text-content'], 'cat-ul-class'=>['cat-list'], 'url-class'=>['card-source']]);
                 }
             }
-            $msg=(!isset($msg))? $cardsData['data']['cards'] . ' cards found in ' . round($cardsData['data']['executionTime'], 2) . " microseconds. Cards created and bind to you." : $msg;
+            $msg=(!isset($msg))? $cardsData['data']['cards'] . ' cards found in ' . round($cardsData['data']['executionTime'], 2) . " seconds. Cards created and bind to you." : $msg;
             return ['status'=>'success', 'msg'=>$msg, 'msgType'=>$msgType, 'tpl'=>$tpl];
         }
-        $msg=(!isset($msg))? "{$cardsData['data']['cards']} cards found in " . round($cardsData['data']['executionTime'], 2) . " microseconds. Cards created and bind to you." : $msg;
+        $msg=(!isset($msg))? "{$cardsData['data']['cards']} cards found in " . round($cardsData['data']['executionTime'], 2) . " seconds. Cards created and bind to you." : $msg;
         \Session::flash('messageDash', $msg);
         \Session::flash('messageType', $msgType);
         return \Redirect::back();

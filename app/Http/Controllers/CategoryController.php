@@ -2,9 +2,7 @@
 
 namespace Drakkard\Http\Controllers;
 
-use Drakkard\Http\Requests;
 use Drakkard\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Drakkard\Services\AdviceCard;
 use Drakkard\Category;
 use Drakkard\Card;
@@ -41,8 +39,8 @@ class CategoryController extends Controller {
 
         $adviceList = [];
         if (Auth::check()) {
-            $adviceList['popuplar'] = $this->advice->getPopular();
-            foreach ($adviceList['popuplar'] as $card) {
+            $adviceList['popular'] = $this->advice->getPopular();
+            foreach ($adviceList['popular'] as $card) {
                 $card->card = unserialize($card->card);
             }
             $adviceList['Relatives to your tastes'] = $this->advice->getByTaste();
@@ -87,8 +85,8 @@ class CategoryController extends Controller {
 
         $adviceList = [];
         if (Auth::check()) {
-            $adviceList['popuplar'] = $this->advice->getPopular();
-            foreach ($adviceList['popuplar'] as $card) {
+            $adviceList['popular'] = $this->advice->getPopular();
+            foreach ($adviceList['popular'] as $card) {
                 $card->card = unserialize($card->card);
             }
             $adviceList['Relatives to your tastes'] = $this->advice->getByTaste();

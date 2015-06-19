@@ -63,7 +63,7 @@
         @include('category.aside')
         @endif
         
-        @if(!empty($adviceList) && Auth::check())
+        @if(!empty($adviceList['popular']) && Auth::check())
         @include('includes.prop')
         @endif
 

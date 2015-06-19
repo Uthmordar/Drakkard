@@ -1,5 +1,5 @@
 <?php
-
+var_dump(env('DB_DATABASE'));die();
 return [
 
 	/*
@@ -60,7 +60,7 @@ return [
 			'password'  => env('DB_PASSWORD', ''),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
+			'prefix'    => 'drakkard_',
 			'strict'    => false,
 		],
 
