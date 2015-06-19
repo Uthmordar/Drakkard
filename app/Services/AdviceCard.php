@@ -42,8 +42,8 @@ class AdviceCard{
             while(count($cards)<$i+1 && $j<5){
                 $cardRequest=Category::find($id)->cards()->orderByRaw("RAND()")->get();
                 foreach($cardRequest as $r){
-                    if(!$r->users()->find(Auth::user()->id)){
-                        $cards[]=$cardRequest[0];
+                    if(!$r->users()->find(Auth::user()->id) && empty($cards[$r->id])){
+                        $cards[$r->id]=$r;
                         break;
                     }
                 }
