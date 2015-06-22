@@ -8,16 +8,19 @@ use Drakkard\Category;
 use Drakkard\Services\CardatorServices;
 use Drakkard\Services\CatHierarchy;
 use Drakkard\Services\CardTplGenerator;
+use Drakkard\Services\AdviceCard;
 
 class CardController extends Controller {
     private $card;
     private $cardator;
     private $catH;
+    private $advice;
     
-    public function __construct(Card $card, CardatorServices $cardator, CatHierarchy $cat){
+    public function __construct(Card $card, CardatorServices $cardator, CatHierarchy $cat, AdviceCard $advice){
         $this->card=$card;
         $this->cardator=$cardator;
         $this->catH=$cat;
+        $this->advice=$advice;
         $this->middleware('auth');
     }
     /**
@@ -93,7 +96,17 @@ class CardController extends Controller {
         $card=Card::findOrFail($id);
         $card->card=unserialize($card->card);
         $catMenu=$this->catH->getHierarchy();
-        return view('card/show', compact('card', 'catMenu'));
+        
+        $adviceList = [];
+        $adviceList['popular'] = $this->advice->getPopular();
+        foreach ($adviceList['popular'] as $card) {
+            $card->card = unserialize($card->card);
+        }
+        $adviceList['Relatives to your tastes'] = $this->advice->getByTaste();
+        foreach ($adviceList['Relatives to your tastes'] as $card) {
+            $card->card = unserialize($card->card);
+        }
+        return view('card/show', compact('card', 'catMenu', 'adviceList'));
     }
 
     /**
