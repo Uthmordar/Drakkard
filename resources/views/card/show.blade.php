@@ -11,7 +11,7 @@
             <ul class="nav-card">
                 @if(Auth::check() && $card->users()->find(Auth::user()->id))
                 <li>
-                    <a href="{{route('detachCard', ['id'=>$card->id])}}" class="link-nav-card bg-red"><span class='glyphicon glyphicon-trash'></span></a>
+                    <a href="{{route('detachCard', ['id'=>$card->id])}}" class="link-nav-card bg-red link-detach-card"><span class='glyphicon glyphicon-trash'></span></a>
                 </li>
                 @endif
                 @if(Auth::check() && !$card->users()->find(Auth::user()->id))

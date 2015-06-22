@@ -25,7 +25,7 @@ class CardTplGenerator{
         $html="<article class='card bg-{$card->card->getQualifiedName()} bg-{$card->card->getDirectParent()}'>
             <ul class='nav-card'>
                 <li>
-                    <a href='" . route('detachCard', ['id'=>$card->id]). "' class='link-nav-card bg-red'><span class='glyphicon glyphicon-trash'></span></a>
+                    <a href='" . route('detachCard', ['id'=>$card->id]). "' class='link-nav-card bg-red link-detach-card'><span class='glyphicon glyphicon-trash'></span></a>
                 </li>
                 <li>
                     <a href='" . route('card.show', ['id'=>$card->id]) . "' class='link-nav-card bg-blue'><span class='glyphicon glyphicon-eye-open'></span></a>
