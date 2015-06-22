@@ -6398,6 +6398,9 @@ label,
 .message .glyphicon {
   margin: 0 0.8rem;
 }
+.modal {
+  z-index: 100000000;
+}
 a.disabled {
   color: inherent;
 }
