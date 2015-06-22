@@ -99,12 +99,12 @@ class CardController extends Controller {
         
         $adviceList = [];
         $adviceList['popular'] = $this->advice->getPopular();
-        foreach ($adviceList['popular'] as $card) {
-            $card->card = unserialize($card->card);
+        foreach ($adviceList['popular'] as $c) {
+            $c->card = unserialize($c->card);
         }
         $adviceList['Relatives to your tastes'] = $this->advice->getByTaste();
-        foreach ($adviceList['Relatives to your tastes'] as $card) {
-            $card->card = unserialize($card->card);
+        foreach ($adviceList['Relatives to your tastes'] as $c) {
+            $c->card = unserialize($c->card);
         }
         return view('card/show', compact('card', 'catMenu', 'adviceList'));
     }
