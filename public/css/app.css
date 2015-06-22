@@ -6880,6 +6880,15 @@ input[type="submit"].active {
 input[type="submit"].active:hover {
   background-color: #449d44;
 }
+@media (max-width: 1300px) {
+  input.form-control {
+    width: 95%;
+  }
+  .container {
+    max-width: 755px;
+    padding: 1rem 0 0;
+  }
+}
 
 html {
   font-size: 62.5%;
