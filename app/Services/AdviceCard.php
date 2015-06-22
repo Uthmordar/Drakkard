@@ -10,10 +10,19 @@ class AdviceCard{
     
     public function getPopular($nb=3){
         $take=(is_int($nb))? $nb : 3;
-        $cards=Card::with('users')->take($take)->get()->sortBy(function($card){
+        $cards=Card::with('users')->take($take*6)->get()->sortBy(function($card){
             return $card->users->count();
         });
-        return $cards;
+        $tot=[];
+        foreach($cards as $card){
+            if(!$card->users()->find(Auth::user()->id)){
+                $tot[]=$card;
+            }
+            if(count($tot)>2){
+                break;
+            }
+        }
+        return $tot;
     }
     
     public function getByTaste(){
