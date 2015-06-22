@@ -10,7 +10,7 @@ class AdviceCard{
     
     public function getPopular($nb=3){
         $take=(is_int($nb))? $nb : 3;
-        $cards=Card::with('users')->take($take*6)->get()->sortBy(function($card){
+        $cards=Card::with('users')->get()->sortBy(function($card){
             return $card->users->count();
         });
         $tot=[];
