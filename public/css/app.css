@@ -6851,6 +6851,9 @@ a.disabled {
           justify-content: center;
   margin-bottom: 1rem;
 }
+input[type="submit"] {
+  margin-top: 1.5rem;
+}
 input[type="submit"].active {
   color: #FFF;
   background-image: linear-gradient(-45deg, #51a686 25%, transparent 25%, transparent 50%, #51a686 50%, #51a686 75%, transparent 75%, transparent);
@@ -6887,6 +6890,10 @@ input[type="submit"].active:hover {
   .container {
     max-width: 755px;
     padding: 1rem 0 0;
+  }
+  .big-card {
+    margin: 0;
+    width: 95%;
   }
 }
 
