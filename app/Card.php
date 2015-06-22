@@ -41,11 +41,10 @@ class Card extends Model {
         }
     }
 
-    public function createCard(\Uthmordar\Cardator\Card\lib\iCard $data, $card, Category $category){
+    public function createCard(\Uthmordar\Cardator\Card\lib\iCard $data, $card, Category $category, $name, $url ){
         $card->type=$data->type;
-        $url=(is_array($data->url))? $data->url[0] : $data->url;
         $card->url=$url;
-        $card->name=$data->type . $url;
+        $card->name=$name;
         $card->card=serialize($data);
         $card->created_at=time();
         $card->updated_at=time();
@@ -54,6 +53,24 @@ class Card extends Model {
         
         $rCat=$category->registerCategories($data->getParents(), $data->getQualifiedName());
         $card->categories()->attach($rCat);
+        $card->save();
+
+        return $card;
+    }
+    
+    public function updateCard(\Uthmordar\Cardator\Card\lib\iCard $data, $card) {
+        $old=unserialize($card->card);
+        foreach($data->properties as $prop){
+            if($old->$prop==null){
+                $old->$prop=$data->$prop;
+            }
+        }
+        $card->card=serialize($old);
+        $card->updated_at=time();
+        if(!$card->users()->find(Auth::user()->id)){
+            $card->users()->attach(Auth::user());
+        }
+        
         $card->save();
 
         return $card;
@@ -70,6 +87,11 @@ class Card extends Model {
         if(count($card)){
             throw new \InvalidArgumentException('This page has already been crawled, but you will be bind to it.');
         }
+    }
+    
+    public function alreadyExistByName($name){
+        $card=Card::where('name', '=', $name)->get();
+        return $card;
     }
     
     /**

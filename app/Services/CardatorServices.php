@@ -24,8 +24,16 @@ class CardatorServices{
         $cards=$this->getCardsFromUrl($url);
         $newCards=[];
         foreach($cards['cards'] as $c){
-            $card=new Card;
-            $newCards[]=$this->card->createCard($c, $card, $this->category);
+            $url=(is_array($c->url))? $c->url[0] : $c->url;
+            $id=($c->name)? (is_array($c->name))? $c->name[0] : $c->name : $url;
+            $name=$c->type . '_' . $id;
+            $old=$this->card->alreadyExistByName($name);
+            if(!count($old)){
+                $card=new Card;
+                $newCards[]=$this->card->createCard($c, $card, $this->category, $name, $url);
+            }else{
+                $this->card->updateCard($c, $old->first());
+            }
         }
         
         return ['cards'=>$newCards, 'data'=>$cards['data']];

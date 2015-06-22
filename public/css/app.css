@@ -6678,8 +6678,11 @@ a.disabled {
 .card .text-content {
   padding: 1rem;
 }
+.card .text-content span > a {
+  word-break: break-all;
+}
 .card h4 {
-  margin-bottom: 0.7rem;
+  margin: 0.1rem;
 }
 .card .nav-card {
   position: absolute;
@@ -6731,7 +6734,7 @@ a.disabled {
   opacity: 1;
 }
 .card .cat-list {
-  margin: 0.7rem;
+  margin: 0.4rem;
   padding: 0;
 }
 .card .cat-list li {
