@@ -9,7 +9,11 @@
                     @foreach($content as $card)
                     <li>
                         <article class='mini-card bg-{{$card->card->getQualifiedName()}} bg-{{$card->card->getDirectParent()}}'>
+                            @if(is_array($card->card->name))
+                            <h6>{{$card->card->name[0]}}</h6>
+                            @else
                             <h6>{{$card->card->name}}</h6>
+                            @endif
                             <a href='{{ route('card.show', ['id'=>$card->id]) }}' class='link-nav-card bg-blue'><span class='glyphicon glyphicon-eye-open'></span></a>
                             <a class='cat' href='{{route('category.show', ['id'=>CatAccessor::getCat($card->card->getQualifiedName())->id])}}'>{{$card->card->getQualifiedName()}}</a>
                         </article>
