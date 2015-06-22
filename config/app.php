@@ -145,6 +145,7 @@ return [
 		'Drakkard\Providers\ConfigServiceProvider',
 		'Drakkard\Providers\EventServiceProvider',
 		'Drakkard\Providers\RouteServiceProvider',
+                'Spatie\Backup\BackupServiceProvider'
 	],
 
 	/*

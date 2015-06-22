@@ -45,7 +45,7 @@
                         }
                     },
                     error: function(error){
-                        $('.error_container').html(error.responseText);
+                        //$('.error_container').html(error.responseText);
                         $submit.removeClass('active');
                         $url.parent().addClass('has-error').append('<span class="error-url bg-danger">'+ JSON.parse(error.responseText).url + '</span>');
                     }
