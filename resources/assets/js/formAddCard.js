@@ -38,9 +38,9 @@
                         i=0;
                         while(data.tpl.length>0 && i<6){
                             if($list.find('.card').length>=6){
-                                $list.find('.card').last().remove();
+                                $list.find('.card').first().remove();
                             }
-                            $list.prepend(data.tpl.pop());
+                            $list.append(data.tpl.shift());
                             i++;
                         }
                     },
