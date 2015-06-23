@@ -49,16 +49,9 @@ class HomeController extends Controller {
     }
     
     public function fav(){
-        $wholeCards=Card::with('users')->get()->sortBy(function($card){
-            return $card->users->count();
-        });
-        $i=0;
-        $cards=[];
-        foreach ($wholeCards as $card) {
-            if($i>5){ break; }
-            $i++;
+        $cards=Card::orderBy('user_count', 'desc')->paginate(6);
+        foreach ($cards as $card) {
             $card->card = unserialize($card->card);
-            $cards[]=$card;
         }
         $catMenu = $this->catH->getHierarchy();
 

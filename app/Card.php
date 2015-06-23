@@ -40,6 +40,10 @@ class Card extends Model {
             }
         }
     }
+    
+    public function userCount(){
+        $this->user_count=count($this->users()->get());
+    }
 
     public function createCard(\Uthmordar\Cardator\Card\lib\iCard $data, $card, Category $category, $name, $url ){
         $card->type=$data->type;
@@ -53,6 +57,7 @@ class Card extends Model {
         
         $rCat=$category->registerCategories($data->getParents(), $data->getQualifiedName());
         $card->categories()->attach($rCat);
+        $card->user_count=1;
         $card->save();
 
         return $card;
@@ -114,11 +119,13 @@ class Card extends Model {
         if($this->users()->find(Auth::user()->id)){
             $this->users()->detach(Auth::user());
         }
+        $this->save();
     }
     
     public function bindUser(){
         if(!$this->users()->find(Auth::user()->id)){
             $this->users()->attach(Auth::user());
         }
+        $this->save();
     }
 }

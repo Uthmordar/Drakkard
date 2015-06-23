@@ -6792,6 +6792,10 @@ a.disabled {
 .big-card .text-content {
   padding: 1rem;
 }
+.big-card .text-content li.properties {
+  margin: 0.5rem 0;
+  line-height: 1.7;
+}
 .big-card h2 {
   margin: 0 0 1rem;
 }

@@ -25,7 +25,7 @@
                         <li>
                             <a href="{{route('card.show', ['id'=>$card->id])}}" class="link-nav-card bg-blue"><span class='glyphicon glyphicon-eye-open'></span></a>
                         </li>
-                        <li><span class='link-nav-card bg-blue'><span class='iterator'>{{count($card->users()->get())}}</span></span></li>
+                        <li><span class='link-nav-card bg-blue'><span class='iterator'>{{$card->user_count}}</span></span></li>
                     </ul>
                     {!! CardTplGenerator::generateCardContent($card, ['header-class'=>['text-content'], 'cat-ul-class'=>['cat-list'], 'url-class'=>['card-source']]) !!}
                 </article>

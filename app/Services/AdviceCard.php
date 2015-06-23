@@ -10,9 +10,7 @@ class AdviceCard{
     
     public function getPopular($nb=3){
         $take=(is_int($nb))? $nb : 3;
-        $cards=Card::with('users')->get()->sortBy(function($card){
-            return $card->users->count();
-        });
+        $cards=Card::orderBy('user_count')->limit($nb*4)->get();
         $tot=[];
         foreach($cards as $card){
             if(!$card->users()->find(Auth::user()->id)){

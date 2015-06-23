@@ -13,7 +13,7 @@ class CreateCardTable extends Migration {
     public function up(){
         Schema::create('cards', function(Blueprint $table){
             $table->increments('id');
-            $table->text('card');
+            $table->binary('card');
             $table->string('type');
             $table->string('url');
             $table->string('name');

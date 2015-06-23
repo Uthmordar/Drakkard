@@ -19,11 +19,14 @@
                     <a href="{{route('attachCard', ['id'=>$card->id])}}" class="link-nav-card bg-green"><span class='glyphicon glyphicon-plus'></span></a>
                 </li>
                 @endif
-                <li>Followers: {{count($card->users()->get())}}</li>
+                <li>Followers: {{$card->user_count}}</li>
             </ul>
             <div class="text-content">
                 @if($card->card->name)
                     <h2 class="text-uppercase">{{(is_array($card->card->name))? $card->card->name[0] : $card->card->name }}</h2>
+                @endif
+                @if($card->card->Headline)
+                    <h2 class="text-uppercase">{{(is_array($card->card->Headline))? $card->card->Headline[0] : $card->card->Headline }}</h2>
                 @endif
                 <span>Source: <a href="{!! (is_array($card->url))? $card->url[0] : $card->url !!}" class="card-source">{{(is_array($card->url))? $card->url[0] : $card->url}}</a></span>
                 <ul class='cat-list'>
@@ -38,7 +41,7 @@
                 <section>
                     <ul>
                     @foreach($card->card->properties as $p)
-                        @if(!in_array($p, ['name', 'url', 'image', 'video']))
+                        @if(!in_array($p, ['name', 'url', 'image', 'video', 'Headline']))
                         <li class='properties'>
                             @if(is_array($card->card->$p))
                             <span class='bold'>{{TplFilters::toNormal($p)}}</span> :
