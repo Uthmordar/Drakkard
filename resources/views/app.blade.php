@@ -39,6 +39,7 @@
                                     @if(Auth::check())
                                     <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                                     @endif
+                                    <li><a href="{{url('/hall-of-card')}}">Hall of Card</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

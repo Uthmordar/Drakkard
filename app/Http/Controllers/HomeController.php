@@ -47,6 +47,35 @@ class HomeController extends Controller {
 
         return view('dashboard/home', compact('cards', 'catMenu', 'adviceList'));
     }
+    
+    public function fav(){
+        $wholeCards=Card::with('users')->get()->sortBy(function($card){
+            return $card->users->count();
+        });
+        $i=0;
+        $cards=[];
+        foreach ($wholeCards as $card) {
+            if($i>5){ break; }
+            $i++;
+            $card->card = unserialize($card->card);
+            $cards[]=$card;
+        }
+        $catMenu = $this->catH->getHierarchy();
+
+        $adviceList = [];
+        if (Auth::check()) {
+            $adviceList['popular'] = $this->advice->getPopular();
+            foreach ($adviceList['popular'] as $card) {
+                $card->card = unserialize($card->card);
+            }
+            $adviceList['Relatives to your tastes'] = $this->advice->getByTaste();
+            foreach ($adviceList['Relatives to your tastes'] as $card) {
+                $card->card = unserialize($card->card);
+            }
+        }
+
+        return view('card/fav', compact('cards', 'catMenu', 'adviceList'));
+    }
 
     public function detachCard($id) {
         $card = Card::findOrFail($id);

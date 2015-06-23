@@ -15,6 +15,8 @@ Route::get('/', 'CategoryController@index');
 
 Route::get('dashboard', 'HomeController@index');
 
+Route::resource('/hall-of-card', 'HomeController@fav');
+
 Route::resource('card', 'CardController');
 
 Route::resource('category', 'CategoryController');
