@@ -20,7 +20,7 @@ class HomeController extends Controller {
     public function __construct(CatHierarchy $catH, AdviceCard $advice) {
         $this->catH = $catH;
         $this->advice = $advice;
-        $this->middleware('auth');
+        $this->middleware('auth',  ['except' => 'fav']);
     }
 
     /**

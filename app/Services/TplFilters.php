@@ -18,7 +18,7 @@ class TplFilters{
                 }
                 return "<a href='$str'>$str</a>";
             }catch (\Exception $e){
-                return "(status error) : <a href='#' class='disabled'>$str</a>";
+                return "(invalid link) : <a href='#' class='disabled'>$str</a>";
             }
         }
         

@@ -44,6 +44,8 @@ class CardTplGenerator{
             }else{
                 $tpl.=$card->card->name;
             }
+        }elseif($card->card->Headline){
+            $tpl.= (is_array($card->card->Headline))? $card->card->Headline[0] : $card->card->Headline;
         }else{
             $tpl.=TplFilters::toNormal($card->card->getQualifiedName());
         }
