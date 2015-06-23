@@ -15,7 +15,7 @@
                             <h6>{{$card->card->name}}</h6>
                             @endif
                             <a href='{{ route('card.show', ['id'=>$card->id]) }}' class='link-nav-card bg-blue'><span class='glyphicon glyphicon-eye-open'></span></a>
-                            <a class='cat' href='{{route('category.show', ['id'=>CatAccessor::getCat($card->card->getQualifiedName())->id])}}'>{{$card->card->getQualifiedName()}}</a>
+                            <a class='cat' href='{{route('category.show', ['id'=>CatAccessor::getCat($card->card->getQualifiedName())->id])}}'>{{ucfirst(TplFilters::toNormal($card->card->getQualifiedName()))}}</a>
                         </article>
                     </li>
                     @endforeach
